@@ -3,3 +3,7 @@ app/cache/*
 composer.lock
 app/logs/*
 app/config/parameters.yml
+vendor/*
+web/bundles/framework/*
+web/bundles/sensiodistribution/*
+.*~
