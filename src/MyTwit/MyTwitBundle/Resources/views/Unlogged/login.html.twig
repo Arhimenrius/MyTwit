@@ -12,17 +12,22 @@
         </div><br class="clear" />
         <div class="content">
             <div class="login">
+                {% if app.session.started %}
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                        {{ flashMessage }}
+                        {% endfor %}
+            {% endif %}
             {{ form_start(form) }}
                 <table>
                     <tr>
-                        <td>{{ form_label(form.Nickname) }}</td>
-                        <td>{{ form_widget(form.Nickname) }}</td>
-                        <td>{{ form_errors(form.Nickname) }}</td>
+                        <td>{{ form_label(form._username) }}</td>
+                        <td>{{ form_widget(form._username) }}</td>
+                        <td>{{ form_errors(form._username) }}</td>
                     </tr>
                     <tr>
-                        <td>{{ form_label(form.Password) }}</td>
-                        <td>{{ form_widget(form.Password) }}</td>
-                        <td>{{ form_errors(form.Password) }}</td>
+                        <td>{{ form_label(form._password) }}</td>
+                        <td>{{ form_widget(form._password) }}</td>
+                        <td>{{ form_errors(form._password) }}</td>
                     </tr>
                     <tr>
                         <td></td>

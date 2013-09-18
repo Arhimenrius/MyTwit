@@ -15,14 +15,15 @@ class LoginForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('Nickname', 'text', array('label' => 'Podaj nazwę użytkownika'));
-        $builder->add('Password', 'password', array('label' => 'Podaj hasło'));
+        $builder->add('_username', 'text', array('label' => 'Podaj nazwę użytkownika'));
+        $builder->add('_password', 'password', array('label' => 'Podaj hasło'));
         $builder->add('Submit', 'submit');
+        $builder ->setAction('login_check');
+        $builder ->setMethod('post');
     }
 
     public function getName()
     {
-        return 'login';
     }
 }
 

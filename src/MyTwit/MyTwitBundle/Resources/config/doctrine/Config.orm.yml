@@ -1,0 +1,18 @@
+MyTwit\MyTwitBundle\Entity\Config:
+    type: entity
+    table: null
+    repositoryClass: MyTwit\MyTwitBundle\Entity\ConfigRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: '255'
+        value:
+            type: string
+            length: '255'
+            nullable: true
+    lifecycleCallbacks: {  }

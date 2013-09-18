@@ -11,6 +11,11 @@
     <body>
         </div><br class="clear" />
         <div class="content">
+            {% if app.session.started %}
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                        {{ flashMessage }}
+                        {% endfor %}
+            {% endif %}
             <div class="login">
             {{ form_start(form) }}
                 <table>

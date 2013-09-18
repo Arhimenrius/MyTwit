@@ -6,8 +6,14 @@ register:
     pattern:  /register
     defaults: { _controller: MyTwitMyTwitBundle:UnloggedUser:register }
 
+activate:
+    pattern:  /activate/{token}
+    defaults: { _controller: MyTwitMyTwitBundle:UnloggedUser:activate }
 
 home_after_login:
     pattern:  /logged/home
     defaults: { _controller: MyTwitMyTwitBundle:Index:home }
 
+config:
+    pattern:  /admin/config
+    defaults: { _controller: MyTwitMyTwitBundle:Index:config }

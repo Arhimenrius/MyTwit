@@ -1,0 +1,19 @@
+MyTwit\MyTwitBundle\Entity\Tweets:
+    type: entity
+    table: null
+    repositoryClass: MyTwit\MyTwitBundle\Entity\TweetsRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        author:
+            type: integer
+        content:
+            type: text
+        date:
+            type: datetime
+        hashtags:
+            type: text
+    lifecycleCallbacks: {  }

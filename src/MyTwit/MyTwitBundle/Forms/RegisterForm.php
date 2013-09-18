@@ -20,8 +20,7 @@ class RegisterForm extends AbstractType
         $builder->add('Nickname', 'text', array(
             'label' => 'Podaj nazwę użytkownika' ,
             'constraints' => array(
-                new Length(array('max' => 255)),
-                new Email())));
+                new Length(array('max' => 255)))));
         
         $builder->add('Password', 'repeated', array(
             'type' => 'password',

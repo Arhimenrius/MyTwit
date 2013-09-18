@@ -1,7 +1,12 @@
-parameters:
-#    my_twit_my_twit.example.class: MyTwit\MyTwitBundle\Example
-
 services:
-#    my_twit_my_twit.example:
-#        class: %my_twit_my_twit.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+  config_helper:
+    class: MyTwit\MyTwitBundle\DependencyInjection\ConfigHelper
+    arguments: [@doctrine.orm.entity_manager]
+    
+  users_helper:
+    class: MyTwit\MyTwitBundle\DependencyInjection\UsersHelper
+    arguments: [@doctrine.orm.entity_manager]
+    
+  send_mail:
+    class: MyTwit\MyTwitBundle\DependencyInjection\Mailer
+    arguments: [@doctrine.orm.entity_manager, @config_helper, @mailer]

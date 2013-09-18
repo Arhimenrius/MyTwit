@@ -25,4 +25,13 @@ MyTwit\MyTwitBundle\Entity\User:
         token:
             type: string
             length: '255'
+        role:
+            type: string
+            length: '255'
+        observed:
+            type: text
+            nullable: true
+        hashtags:
+            type: text
+            nullable: true
     lifecycleCallbacks: {  }

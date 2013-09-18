@@ -1,0 +1,14 @@
+MyTwit\MyTwitBundle\Entity\Hashtags:
+    type: entity
+    table: null
+    repositoryClass: MyTwit\MyTwitBundle\Entity\HashtagsRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: '255'
+    lifecycleCallbacks: {  }

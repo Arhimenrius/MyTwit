@@ -3,13 +3,11 @@
 namespace MyTwit\MyTwitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  */
-class User implements UserInterface, \Serializable
+class User
 {
     /**
      * @var integer
@@ -249,66 +247,5 @@ class User implements UserInterface, \Serializable
     public function getHashtags()
     {
         return $this->hashtags;
-    }
-    /**
-     * @var string
-     */
-    private $role;
-
-
-    /**
-     * Set role
-     *
-     * @param string $role
-     * @return User
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-    
-        return $this;
-    }
-
-    /**
-     * Get role
-     *
-     * @return string 
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-    
-    public function getRoles() {
-        if($this->role == 'admin')
-        {
-            return array('ROLE_ADMIN');
-        }
-        elseif($this->role == 'user')
-        {
-            return array('ROLE_USER');
-        }
-    }
-    
-    public function getSalt() {
-        
-    }
-    
-    public function getUsername() {
-        return $this->nickname;
-    }
-    
-    public function eraseCredentials() {
-    }
-    
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-        ));
-    }
-    
-    public function unserialize($serialized) {
-        list ($this->id) = unserialize($serialized);
     }
 }

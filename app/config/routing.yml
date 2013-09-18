@@ -5,6 +5,9 @@ my_twit_my_twit:
 login:
      pattern:   /
      defaults: { _controller: MyTwitMyTwitBundle:UnloggedUser:login }
-login_check:
-     pattern:   /login_check
      
+login_check:
+     pattern: /login_check
+
+logout: 
+     path: /logout

@@ -21,11 +21,19 @@
                 <li>|</li>
                 <li class="option">Twoje konto</li>
                 <li>|</li>
+                <li class="option">Konfiguracja</li>
+                <li>|</li>
                 <li class="option">Wyloguj</li>
             </ul>
         </div>
         <br class="clear" />
         <div class="content">
+            {% if app.session.started %}
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                        {{ flashMessage }}
+                        {% endfor %}
+            {% endif %}
+            
             {% block short_box %}
             {% endblock %}
             {% block long_box %}
