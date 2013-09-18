@@ -1,0 +1,10 @@
+my_twit_my_twit:
+    resource: "@MyTwitMyTwitBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login:
+     pattern:   /
+     defaults: { _controller: MyTwitMyTwitBundle:UnloggedUser:login }
+login_check:
+     pattern:   /login_check
+     

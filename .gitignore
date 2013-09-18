@@ -1,0 +1,5 @@
+nbproject/
+app/cache/*
+composer.lock
+app/logs/*
+app/config/parameters.yml

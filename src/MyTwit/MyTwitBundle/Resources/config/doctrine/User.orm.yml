@@ -1,0 +1,28 @@
+MyTwit\MyTwitBundle\Entity\User:
+    type: entity
+    table: null
+    repositoryClass: MyTwit\MyTwitBundle\Entity\UserRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        nickname:
+            type: string
+            length: '255'
+        password:
+            type: string
+            length: '128'
+        email:
+            type: string
+            length: '255'
+        avatar:
+            type: string
+            length: '255'
+        switched:
+            type: boolean
+        token:
+            type: string
+            length: '255'
+    lifecycleCallbacks: {  }

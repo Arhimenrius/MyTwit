@@ -1,0 +1,13 @@
+login:
+    pattern:  /
+    defaults: { _controller: MyTwitMyTwitBundle:UnloggedUser:login }
+    
+register:
+    pattern:  /register
+    defaults: { _controller: MyTwitMyTwitBundle:UnloggedUser:register }
+
+
+home_after_login:
+    pattern:  /logged/home
+    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+

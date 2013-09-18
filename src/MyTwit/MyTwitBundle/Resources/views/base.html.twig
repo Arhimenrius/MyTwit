@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="/bundles/mytwitmytwit/css/style.css" />
+        {% endblock %}
+    </head>
+    <body>
+        <div class="top_menu">
+            <ul>
+                <li class="option">Strona Główna</li>
+                <li>|</li>
+                <li class="option">Odpowiedzi</li>
+                <li>|</li>
+                <li class="option">O Tobie</li>
+                <li>|</li>
+                <li class="option">Tagi</li>
+                <li>|</li>
+                <li class="option">Twoje konto</li>
+                <li>|</li>
+                <li class="option">Wyloguj</li>
+            </ul>
+        </div>
+        <br class="clear" />
+        <div class="content">
+            {% block short_box %}
+            {% endblock %}
+            {% block long_box %}
+            {% endblock %}
+                
+        </div>
+    </body>
+</html>

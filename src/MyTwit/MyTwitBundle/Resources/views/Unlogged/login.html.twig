@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="/bundles/mytwitmytwit/css/style.css" />
+        {% endblock %}
+    </head>
+    <body>
+        </div><br class="clear" />
+        <div class="content">
+            <div class="login">
+            {{ form_start(form) }}
+                <table>
+                    <tr>
+                        <td>{{ form_label(form.Nickname) }}</td>
+                        <td>{{ form_widget(form.Nickname) }}</td>
+                        <td>{{ form_errors(form.Nickname) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(form.Password) }}</td>
+                        <td>{{ form_widget(form.Password) }}</td>
+                        <td>{{ form_errors(form.Password) }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>{{ form_widget(form.Submit) }}</td>
+                        <td></td>
+                    </tr>
+                </table>
+            {{ form_end(form) }}
+                <a href="{{ path('register') }}">Nie masz jeszcze konta? Zarejestruj się!</a>
+            </div>
+        </div>
+    </body>
+</html>
