@@ -35,3 +35,7 @@ MyTwit\MyTwitBundle\Entity\User:
             type: text
             nullable: true
     lifecycleCallbacks: {  }
+    oneToMany:
+         tweets:
+             targetEntity: Tweets
+             mappedBy: user

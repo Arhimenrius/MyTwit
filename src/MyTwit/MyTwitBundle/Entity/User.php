@@ -14,39 +14,47 @@ class User implements UserInterface, \Serializable
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $nickname;
+    protected $nickname;
 
     /**
      * @var string
      */
-    private $password;
+    protected $password;
 
     /**
      * @var string
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      */
-    private $avatar;
+    protected $avatar;
 
     /**
      * @var boolean
      */
-    private $switched;
+    protected $switched;
 
     /**
      * @var string
      */
-    private $token;
+    protected $token;
+    
+    protected $tweets;
 
 
+     public function __construct()
+     {
+         $this->tweets = new ArrayCollection();
+         
+         
+     }
     /**
      * Get id
      *
@@ -311,4 +319,33 @@ class User implements UserInterface, \Serializable
     public function unserialize($serialized) {
         list ($this->id) = unserialize($serialized);
     }
+    
+    public function addTweet(\MyTwit\MyTwitBundle\Entity\Tweets $tweets)
+    {
+        $this->tweets[] = $tweets;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tweets
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Tweets $tweets
+     */
+    public function removeTweet(\MyTwit\MyTwitBundle\Entity\Tweets $tweets)
+    {
+        $this->tweets->removeElement($tweets);
+    }
+
+    /**
+     * Get tweets
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTweets()
+    {
+        return $this->tweets;
+    }
+    
+    
 }

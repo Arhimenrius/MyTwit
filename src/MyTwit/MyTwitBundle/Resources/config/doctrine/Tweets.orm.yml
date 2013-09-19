@@ -8,12 +8,21 @@ MyTwit\MyTwitBundle\Entity\Tweets:
             id: true
             generator:
                 strategy: AUTO
-        author:
-            type: integer
         content:
-            type: text
+            type: string
+            length: '255'
         date:
             type: datetime
         hashtags:
             type: text
+            nullable: true
+        answer_for:
+            type: integer
     lifecycleCallbacks: {  }
+    manyToOne:
+        author:
+             targetEntity: User
+             inversedBy: tweets
+             joinColumn:
+                 name: author
+                 referencedColumnName: id

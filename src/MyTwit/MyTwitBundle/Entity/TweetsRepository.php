@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class TweetsRepository extends EntityRepository
 {
+    public function returnNewTweets()
+    {
+        return $this->findBy(array('answer_for' => 0), array(), 100);
+    }
+    
+    public function returnAnswers($id)
+    {
+        return $this->findBy(array('answer_for' => $id), array());
+    }
 }

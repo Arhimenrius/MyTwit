@@ -7,3 +7,5 @@ vendor/*
 web/bundles/framework/*
 web/bundles/sensiodistribution/*
 .*~
+web/avatars/*.*
+web/avatars/original/*

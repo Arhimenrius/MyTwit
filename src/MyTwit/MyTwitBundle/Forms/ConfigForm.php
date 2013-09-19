@@ -59,7 +59,7 @@ class ConfigForm extends AbstractType
     
     /**
      * 
-     * @return string Return f  orm name
+     * @return string Return form name
      */
     public function getName()
     {

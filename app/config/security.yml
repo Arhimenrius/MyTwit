@@ -39,3 +39,4 @@ security:
 
     access_control:
         - { path: ^/logged, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }

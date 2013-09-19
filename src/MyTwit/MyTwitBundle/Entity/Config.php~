@@ -3,6 +3,7 @@
 namespace MyTwit\MyTwitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Config
@@ -12,17 +13,17 @@ class Config
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $value;
+    protected $value;
 
 
     /**

@@ -13,6 +13,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class LoginForm extends AbstractType
 {
+    /**
+     * Return form
+     * 
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('_username', 'text', array('label' => 'Podaj nazwę użytkownika'));
@@ -22,6 +28,9 @@ class LoginForm extends AbstractType
         $builder ->setMethod('post');
     }
 
+    /**
+     * Return form name
+     */
     public function getName()
     {
     }

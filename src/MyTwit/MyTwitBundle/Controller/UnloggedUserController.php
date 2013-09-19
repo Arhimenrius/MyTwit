@@ -17,11 +17,12 @@ class UnloggedUserController extends Controller
      */
     public function loginAction()
     {
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY'))
-        {
-            // redirect authenticated users to homepage
-           return $this->redirect($this->generateUrl('home_after_login'));
-        }
+        //if user is login, redirect to logged page
+        $security = $this->get('security_helper');
+        if($security->onlyUnlogged() == true)
+            return $this->redirect($this->generateUrl('home_after_login'));
+        
+        
         $form = $this->createForm(new LoginForm());
         $request = $this->getRequest();
         $session = $request->getSession();
@@ -55,6 +56,12 @@ class UnloggedUserController extends Controller
      */
     public function registerAction()
     {
+        //if user is login, redirect to logged page
+        $security = $this->get('security_helper');
+        if($security->onlyUnlogged() == true)
+            return $this->redirect($this->generateUrl('home_after_login'));
+            
+            
         $user = new User();
         $form = $this->createForm(new RegisterForm(), $user);
         
@@ -115,8 +122,14 @@ class UnloggedUserController extends Controller
      * @param string $token Set token to activate
      * @return url Redirect to login form
      */
+    
     public function activateAction($token)
     {
+        //if user is login, redirect to logged page
+        $security = $this->get('security_helper');
+        if($security->onlyUnlogged() == true)
+            return $this->redirect($this->generateUrl('home_after_login'));
+        
         //activate account
         $helper = $this->get('users_helper');
         $activate = $helper -> activateUser($token);

@@ -3,6 +3,7 @@
 namespace MyTwit\MyTwitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tweets
@@ -12,27 +13,27 @@ class Tweets
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      */
-    private $author;
+    protected $author;
 
     /**
      * @var string
      */
-    private $content;
+    protected $content;
 
     /**
      * @var \DateTime
      */
-    private $date;
+    protected $date;
 
     /**
      * @var string
      */
-    private $hashtags;
+    protected $hashtags;
 
 
     /**

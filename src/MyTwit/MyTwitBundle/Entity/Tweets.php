@@ -137,4 +137,32 @@ class Tweets
     {
         return $this->hashtags;
     }
+    /**
+     * @var integer
+     */
+    private $answer_for;
+
+
+    /**
+     * Set answer_for
+     *
+     * @param integer $answerFor
+     * @return Tweets
+     */
+    public function setAnswerFor($answerFor)
+    {
+        $this->answer_for = $answerFor;
+    
+        return $this;
+    }
+
+    /**
+     * Get answer_for
+     *
+     * @return integer 
+     */
+    public function getAnswerFor()
+    {
+        return $this->answer_for;
+    }
 }

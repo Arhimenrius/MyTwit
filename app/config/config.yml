@@ -56,3 +56,8 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        
+winzou_cache:
+    options:
+        cache_dir: %kernel.cache_dir%/MyTwitCache
+        default_driver: memcache

@@ -7,6 +7,21 @@ services:
     class: MyTwit\MyTwitBundle\DependencyInjection\UsersHelper
     arguments: [@doctrine.orm.entity_manager]
     
+  tweets_helper:
+    class: MyTwit\MyTwitBundle\DependencyInjection\TweetsHelper
+    arguments: [@doctrine.orm.entity_manager]
+    
+  security_helper:
+    class: MyTwit\MyTwitBundle\DependencyInjection\SecurityHelper
+    arguments: [@doctrine.orm.entity_manager, @security.context]
+    
   send_mail:
     class: MyTwit\MyTwitBundle\DependencyInjection\Mailer
     arguments: [@doctrine.orm.entity_manager, @config_helper, @mailer]
+    
+  image_operations:
+    class: Awojtys\TicketServBundle\DependencyInjection\ImageOperations
+    arguments: [@doctrine.orm.entity_manager, @config_helper]
+
+  ajax_helper:
+    class: Awojtys\TicketServBundle\DependencyInjection\AjaxHelper

@@ -4,6 +4,10 @@ body{
     height:1000px;
 }
 
+textarea{
+    resize:none;
+}
+    
 html>body .top_menu {
     position: fixed; }
 
@@ -50,10 +54,15 @@ li.option {
 
 li.option:hover {
     background:#000;
+    color:#00cccc;
 }
 
 .top_menu{
    box-shadow: 0px 5px 10px 1px #000;
+}
+
+.top_menu a{
+    color:#fff;
 }
 
 /* content */
@@ -68,6 +77,7 @@ li.option:hover {
     overflow:auto;
 }
 
+/* short_box */
 .short_box{
     float:left;
     width:300px;
@@ -79,10 +89,10 @@ li.option:hover {
     background-color: rgba(255,255,255,1);
     z-index: 0;
     border: solid 1px #aaa;
-    
-    
 }
 
+
+/* wide box */
 .long_box{
     float:right;
     width: 550px;
@@ -94,4 +104,60 @@ li.option:hover {
     background-color: rgba(255,255,255,1);
     z-index: 0;
     border: solid 1px #aaa;
+}
+
+/* other */
+div.nickname{
+    font-weight: bold;
+    font-size:20px;
+    font-family:Arial, Helvetica;
+    float:left;
+    padding: 10px 0 0 0;
+    margin-left:10px;}
+
+div.nickname a{
+    color:#000;
+    text-decoration: none;
+}
+
+div.nickname a:hover{
+    color:#00cccc;
+    text-decoration: underline;
+}
+div.avatar{
+    float:left;
+}
+
+div.email{
+    font-weight: bold;
+    font-size:16px;
+    font-family:Arial, Helvetica;
+    float:left;
+    margin-left:10px;
+    padding: 10px 0 0 0;
+}
+
+div.date{
+    font-weight: bold;
+    font-size:14px;
+    font-family:Arial, Helvetica;
+    float:right;
+    margin-left:10px; 
+    padding: 10px 0 0 0;
+}
+
+div.tweet_content{
+    width:530px;
+    font-size:14px;
+    font-family: Arial, Helvetica;
+    clear:both;
+    padding: 10px 10px 30px 10px;
+    border-bottom: 1px #000 solid;
+}
+div.tweet_form{
+    color:#099;
+    padding-top:20px;
+    clear:both;
+    width:300px;
+    font-weight: bold;
 }

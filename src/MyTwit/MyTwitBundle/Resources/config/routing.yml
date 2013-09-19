@@ -14,6 +14,30 @@ home_after_login:
     pattern:  /logged/home
     defaults: { _controller: MyTwitMyTwitBundle:Index:home }
 
+answers:
+    pattern:  /logged/answer
+    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    
+about_you:
+    pattern:  /logged/about_you
+    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    
+tags:
+    pattern:  /logged/tags
+    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+
+observed:
+    pattern:  /logged/observed
+    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    
+user_account:
+    pattern:  /logged/profil
+    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    
 config:
     pattern:  /admin/config
-    defaults: { _controller: MyTwitMyTwitBundle:Index:config }
+    defaults: { _controller: MyTwitMyTwitBundle:Admin:config }
+    
+twit:
+    pattern: /logged/addtwit
+    defaults: { _controller: MyTwitMyTwitBundle:Index:addtwit }
