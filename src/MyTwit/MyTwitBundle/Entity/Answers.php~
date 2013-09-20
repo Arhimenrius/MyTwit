@@ -3,43 +3,42 @@
 namespace MyTwit\MyTwitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Tweets
+ * Answers
  */
-class Tweets
+class Answers
 {
     /**
      * @var integer
      */
-    protected $id;
+    private $id;
 
     /**
      * @var integer
      */
-    protected $author;
+    private $answerFor;
 
     /**
      * @var string
      */
-    protected $content;
+    private $author;
+
+    /**
+     * @var string
+     */
+    private $content;
 
     /**
      * @var \DateTime
      */
-    protected $date;
+    private $date;
 
     /**
      * @var string
      */
-    protected $hashtags;
+    private $hashtags;
 
-    
-     public function __construct()
-     {
-         $this->answer_for = new ArrayCollection();  
-     }
 
     /**
      * Get id
@@ -52,10 +51,33 @@ class Tweets
     }
 
     /**
+     * Set answerFor
+     *
+     * @param integer $answerFor
+     * @return Answers
+     */
+    public function setAnswerFor($answerFor)
+    {
+        $this->answerFor = $answerFor;
+    
+        return $this;
+    }
+
+    /**
+     * Get answerFor
+     *
+     * @return integer 
+     */
+    public function getAnswerFor()
+    {
+        return $this->answerFor;
+    }
+
+    /**
      * Set author
      *
-     * @param integer $author
-     * @return Tweets
+     * @param string $author
+     * @return Answers
      */
     public function setAuthor($author)
     {
@@ -67,7 +89,7 @@ class Tweets
     /**
      * Get author
      *
-     * @return integer 
+     * @return string 
      */
     public function getAuthor()
     {
@@ -78,7 +100,7 @@ class Tweets
      * Set content
      *
      * @param string $content
-     * @return Tweets
+     * @return Answers
      */
     public function setContent($content)
     {
@@ -101,7 +123,7 @@ class Tweets
      * Set date
      *
      * @param \DateTime $date
-     * @return Tweets
+     * @return Answers
      */
     public function setDate($date)
     {
@@ -124,12 +146,22 @@ class Tweets
      * Set hashtags
      *
      * @param string $hashtags
-     * @return Tweets
+     * @return Answers
      */
     public function setHashtags($hashtags)
     {
         $this->hashtags = $hashtags;
     
         return $this;
+    }
+
+    /**
+     * Get hashtags
+     *
+     * @return string 
+     */
+    public function getHashtags()
+    {
+        return $this->hashtags;
     }
 }

@@ -12,32 +12,42 @@ activate:
 
 home_after_login:
     pattern:  /logged/home
-    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
+
+add_twit:
+    pattern: /logged/home/addtwit
+    defaults: { _controller: MyTwitMyTwitBundle:Home:addTweet }
+    
+return_all_tweets:
+    pattern: /logged/home/getalltweets
+    defaults: { _controller: MyTwitMyTwitBundle:Home:getTweets }
+    
+update_all_tweets:
+    pattern: /logged/home/updatealltweets
+    defaults: { _controller: MyTwitMyTwitBundle:Home:updateTweets }
 
 answers:
     pattern:  /logged/answer
-    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
     
 about_you:
     pattern:  /logged/about_you
-    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
     
 tags:
     pattern:  /logged/tags
-    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
 
 observed:
     pattern:  /logged/observed
-    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
     
 user_account:
     pattern:  /logged/profil
-    defaults: { _controller: MyTwitMyTwitBundle:Index:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
     
 config:
     pattern:  /admin/config
-    defaults: { _controller: MyTwitMyTwitBundle:Admin:config }
+    defaults: { _controller: MyTwitMyTwitBundle:Home:config }
     
-twit:
-    pattern: /logged/addtwit
-    defaults: { _controller: MyTwitMyTwitBundle:Index:addtwit }
+

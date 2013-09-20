@@ -9,7 +9,7 @@ services:
     
   tweets_helper:
     class: MyTwit\MyTwitBundle\DependencyInjection\TweetsHelper
-    arguments: [@doctrine.orm.entity_manager]
+    arguments: [@doctrine.orm.entity_manager, @security.context, @cache_helper]
     
   security_helper:
     class: MyTwit\MyTwitBundle\DependencyInjection\SecurityHelper
@@ -20,8 +20,13 @@ services:
     arguments: [@doctrine.orm.entity_manager, @config_helper, @mailer]
     
   image_operations:
-    class: Awojtys\TicketServBundle\DependencyInjection\ImageOperations
+    class: MyTwit\MyTwitBundle\DependencyInjection\ImageOperations
     arguments: [@doctrine.orm.entity_manager, @config_helper]
 
   ajax_helper:
-    class: Awojtys\TicketServBundle\DependencyInjection\AjaxHelper
+    class: MyTwit\MyTwitBundle\DependencyInjection\AjaxHelper
+    arguments: [@doctrine.orm.entity_manager, @cache_helper]
+    
+  cache_helper:
+    class: MyTwit\MyTwitBundle\DependencyInjection\CacheHelper
+    arguments: [@doctrine.orm.entity_manager, @winzou_cache.memcache, @security.context]

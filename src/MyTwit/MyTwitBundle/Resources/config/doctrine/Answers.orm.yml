@@ -1,7 +1,7 @@
-MyTwit\MyTwitBundle\Entity\Tweets:
+MyTwit\MyTwitBundle\Entity\Answers:
     type: entity
     table: null
-    repositoryClass: MyTwit\MyTwitBundle\Entity\TweetsRepository
+    repositoryClass: MyTwit\MyTwitBundle\Entity\AnswersRepository
     fields:
         id:
             type: integer
@@ -15,16 +15,17 @@ MyTwit\MyTwitBundle\Entity\Tweets:
             type: datetime
         hashtags:
             type: text
-            nullable: true
     lifecycleCallbacks: {  }
     manyToOne:
+        answersFor:
+             targetEntity: Tweets
+             inversedBy: answersFor
+             joinColumn:
+                 name: answersFor
+                 referencedColumnName: id
         author:
              targetEntity: User
-             inversedBy: tweets
+             inversedBy: answersFor
              joinColumn:
                  name: author
                  referencedColumnName: id
-    oneToMany:
-         answersFor:
-             targetEntity: Answers
-             mappedBy: tweets

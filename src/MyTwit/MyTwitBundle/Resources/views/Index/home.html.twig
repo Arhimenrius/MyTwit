@@ -11,7 +11,7 @@
         </div>
     </div>
     <script src="/bundles/mytwitmytwit/js/AddTweet.js"></script>
-    <div class="tweet_form" ng-controller="TweetController">
+    <div class="tweet_form" ng-controller="addTweetController">
         
         {{form_start(form)}}
             {{form_label(form.Tweet)}}<br />
@@ -24,14 +24,13 @@
 {% endblock %}
 
 {% block long_box %}
-<div class="long_box">
-    {% for tweet in tweets %}
-        <div class="tweet">
-            <div class="nickname">{{tweet.author.nickname}}</div>
-            <div class="email">{{tweet.author.email}}</div>
-            <div class="date">{{tweet.date|date('Y-m-d')}}</div>
-            <div class="tweet_content">fsdfsdfds</div>
-        </div>
-    {% endfor %}
+<script src="/bundles/mytwitmytwit/js/SelectTweets.js"></script>
+<div class="long_box" ng-controller="allTweetsController" ng-init="getTweets()">
+    <div class="tweet" ng-repeat="tweet in tweets | orderBy:'ID':true">
+        <div class="nickname">[[tweet.Author]]</div>
+        <div class="email">[[tweet.Email]]</div>
+        <div class="date">[[tweet.Date]]</div>
+        <div class="tweet_content">[[tweet.Content]]</div>
+    </div>
 </div>
 {% endblock %}

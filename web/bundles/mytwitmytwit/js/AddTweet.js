@@ -1,4 +1,4 @@
-myTwit.controller('TweetController', function($scope, $http)
+myTwit.controller('addTweetController', function($scope, $http)
 {
     $scope.rows = 1;
     $scope.remaining_chars = 255;
@@ -49,7 +49,7 @@ myTwit.controller('TweetController', function($scope, $http)
         {
             $http({
                 method: 'POST',
-                url: '/app_dev.php/logged/addtwit',
+                url: '/app_dev.php/logged/home/addtwit',
                 data: {content: content},
                 headers: {'Content-Type': 'application/json'},
             })

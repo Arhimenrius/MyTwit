@@ -51,9 +51,7 @@ class User implements UserInterface, \Serializable
 
      public function __construct()
      {
-         $this->tweets = new ArrayCollection();
-         
-         
+         $this->tweets = new ArrayCollection();  
      }
     /**
      * Get id
@@ -345,5 +343,45 @@ class User implements UserInterface, \Serializable
     public function getTweets()
     {
         return $this->tweets;
+    }
+    
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $answers;
+
+
+    /**
+     * Add answers
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answers
+     * @return User
+     */
+    public function addAnswer(\MyTwit\MyTwitBundle\Entity\Answers $answers)
+    {
+        $this->answers[] = $answers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove answers
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answers
+     */
+    public function removeAnswer(\MyTwit\MyTwitBundle\Entity\Answers $answers)
+    {
+        $this->answers->removeElement($answers);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
     }
 }

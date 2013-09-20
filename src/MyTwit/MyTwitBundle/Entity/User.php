@@ -51,9 +51,7 @@ class User implements UserInterface, \Serializable
 
      public function __construct()
      {
-         $this->tweets = new ArrayCollection();
-         
-         
+         $this->tweets = new ArrayCollection();  
      }
     /**
      * Get id
@@ -205,12 +203,12 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      */
-    private $observed;
+    protected $observed;
 
     /**
      * @var string
      */
-    private $hashtags;
+    protected $hashtags;
 
 
     /**
@@ -261,7 +259,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      */
-    private $role;
+    protected $role;
 
 
     /**
@@ -348,4 +346,80 @@ class User implements UserInterface, \Serializable
     }
     
     
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    protected $answers;
+
+
+    /**
+     * Add answers
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answers
+     * @return User
+     */
+    public function addAnswer(\MyTwit\MyTwitBundle\Entity\Answers $answers)
+    {
+        $this->answers[] = $answers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove answers
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answers
+     */
+    public function removeAnswer(\MyTwit\MyTwitBundle\Entity\Answers $answers)
+    {
+        $this->answers->removeElement($answers);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    protected $answersFor;
+
+
+    /**
+     * Add answersFor
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answersFor
+     * @return User
+     */
+    public function addAnswersFor(\MyTwit\MyTwitBundle\Entity\Answers $answersFor)
+    {
+        $this->answersFor[] = $answersFor;
+    
+        return $this;
+    }
+
+    /**
+     * Remove answersFor
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answersFor
+     */
+    public function removeAnswersFor(\MyTwit\MyTwitBundle\Entity\Answers $answersFor)
+    {
+        $this->answersFor->removeElement($answersFor);
+    }
+
+    /**
+     * Get answersFor
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswersFor()
+    {
+        return $this->answersFor;
+    }
 }

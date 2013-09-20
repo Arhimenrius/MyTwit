@@ -39,3 +39,6 @@ MyTwit\MyTwitBundle\Entity\User:
          tweets:
              targetEntity: Tweets
              mappedBy: user
+         answersFor:
+             targetEntity: Answers
+             mappedBy: user
