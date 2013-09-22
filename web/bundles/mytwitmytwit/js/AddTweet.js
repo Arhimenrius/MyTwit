@@ -57,6 +57,12 @@ myTwit.controller('addTweetController', function($scope, $http)
             {
             });
         }
+        $scope.content = '';
+        $scope.remaining_chars = 255;
+        $scope.changeRows('');
+        $scope.checkButton('');
+        
+        /* update user data */
     }
 }
 );

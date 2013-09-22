@@ -7,6 +7,7 @@ use MyTwit\MyTwitBundle\Forms\TweetForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MyTwit\MyTwitBundle\Entity\Tweets;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class HomeController extends Controller
@@ -20,18 +21,13 @@ class HomeController extends Controller
     {
         $cache = $this->get('cache_helper');
         $cache->createTweetsCache();
-        
-   /*   $cache = $this->get('winzou_cache.memcache');
-        if ($cache->contains('Tweets_answers')) {
-        $bar = $cache->fetch('Tweets');
-        var_dump($bar);
-}*/
-        
         $form = $this->createForm(new TweetForm());
-        
+                $cache = $this->get('winzou_cache.memcache');
+        $tweets_cache = $cache->fetch('Tweets');
         return $this->render('MyTwitMyTwitBundle:Index:home.html.twig', array(
             'form' => $form->createView()
         ));
+        
     }
     
     /**
@@ -57,7 +53,7 @@ class HomeController extends Controller
     {   
         $ajax = $this->get('ajax_helper');
         $data_array = $ajax->prepareArrayFromAllTweets();
-        return new \Symfony\Component\HttpFoundation\JsonResponse($data_array);   
+        return new JsonResponse($data_array);   
     }
     
     public function updateTweetsAction()
@@ -69,14 +65,14 @@ class HomeController extends Controller
         
         if($tweets_cache == $user_cache)
         {
-            $data_array = 't';
+            return new JsonResponse(); 
         }
         else
         {
             $ajax = $this->get('ajax_helper');
             $data_array = $ajax->prepareArrayForUpdateTweets(end($user_cache));
+            return new JsonResponse($data_array);
         }
-        
-        return new \Symfony\Component\HttpFoundation\JsonResponse($data_array);   
+          
     }
 }

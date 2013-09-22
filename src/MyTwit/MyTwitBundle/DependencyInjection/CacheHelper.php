@@ -27,20 +27,19 @@ class CacheHelper
      */
     public function createTweetsCache()
     {
-        
-        if(!$this->_cache->contains('Tweets'))
+        $tweets = $this->_em->getRepository('MyTwitMyTwitBundle:Tweets')->findAll();
+        if(!$this->_cache->contains('Tweets') && !empty($tweets))
         {
             $ids = array();
-            $tweets = $this->_em->getRepository('MyTwitMyTwitBundle:Tweets')->findAll();
             foreach($tweets as $tweet)
             {
                 $ids[] = $tweet->getID();
             }
             $this->_cache->save('Tweets', $ids);
         }
-        if(!$this->_cache->contains('Tweets_answers'))
+        $answers = $this->_em->getRepository('MyTwitMyTwitBundle:Answers')->findAll();
+        if(!$this->_cache->contains('Tweets_answers') && !empty($answers))
         {
-            $answers = $this->_em->getRepository('MyTwitMyTwitBundle:Answers')->findAll();
             $i = 0;
             foreach($answers as $answer)
             {
@@ -69,11 +68,12 @@ class CacheHelper
     public function createUserCache($tweets, $answers)
     {
         $ids = array();
+        $user_id = $this->_security->getToken()->getUser()->getID();
         foreach($tweets as $tweet)
         {
                 $ids[] = $tweet->getID();
         }
-        $this->_cache->save($this->_security->getToken()->getUser()->getID().'.tweets',$ids);
+        $this->_cache->save($user_id.'.tweets',$ids);
 
         $ids = array();
         $i=0;
@@ -83,13 +83,19 @@ class CacheHelper
             $ids[$i]['for'] = $answer->getAnswersFor()->getID();
             $i++;
         }
-        $this->_cache->save($this->_security->getToken()->getUser()->getID().'.answers', $ids);
+        $this->_cache->save($user_id.'.answers', $ids);
     }
     
-    public function updateUserCache()
+    public function updateUserCache($ids)
     {
-        
-    }
+        $user_id = $this->_security->getToken()->getUser()->getID();
+        $tweets = $this->_cache->fetch($user_id.'.tweets');
+        foreach($ids as $id)
+        {
+            array_push($tweets, $id);
+        }
+        $this->_cache->save($user_id.'.tweets',$tweets);
+   }
 }
 
 ?>
