@@ -84,6 +84,7 @@ class UsersHelper
         if($query)
         {
             $query->setToken('1');
+            $query->setIs_Active(1);
             $this->_em->flush();
             return 'Użytkownik został zaaktywowany';
         }

@@ -1,4 +1,4 @@
-myTwit.controller('addTweetController', function($scope, $http)
+myTwit.controller('addTweetController', function($scope, $http, UpdateHelper)
 {
     $scope.rows = 1;
     $scope.remaining_chars = 255;
@@ -55,8 +55,10 @@ myTwit.controller('addTweetController', function($scope, $http)
             })
             .success(function(response)
             {
+                angular.element(document.getElementsByClassName('long_box')[0]).scope().updateTweets();
             });
         }
+        
         $scope.content = '';
         $scope.remaining_chars = 255;
         $scope.changeRows('');

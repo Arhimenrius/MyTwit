@@ -5,11 +5,11 @@ namespace MyTwit\MyTwitBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 /**
  * User
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface, \Serializable, AdvancedUserInterface
 {
     /**
      * @var integer
@@ -48,6 +48,7 @@ class User implements UserInterface, \Serializable
     
     protected $tweets;
 
+    protected $is_active;
 
      public function __construct()
      {
@@ -421,5 +422,50 @@ class User implements UserInterface, \Serializable
     public function getAnswersFor()
     {
         return $this->answersFor;
+    }
+    
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->is_active;
+    }
+    /**
+     * @var boolean
+     */
+    /**
+     * Set is_active
+     *
+     * @param boolean $isActive
+     * @return User
+     */
+    public function setIs_Active($isActive)
+    {
+        $this->is_active = $isActive;
+    
+        return $this;
+    }
+
+    /**
+     * Get is_active
+     *
+     * @return boolean 
+     */
+    public function getIs_Active()
+    {
+        return $this->is_active;
     }
 }

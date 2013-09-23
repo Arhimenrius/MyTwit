@@ -12,32 +12,32 @@ class Answers
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      */
-    private $answerFor;
+    protected $answerFor;
 
     /**
      * @var string
      */
-    private $author;
+    protected $author;
 
     /**
      * @var string
      */
-    private $content;
+    protected $content;
 
     /**
      * @var \DateTime
      */
-    private $date;
+    protected $date;
 
     /**
      * @var string
      */
-    private $hashtags;
+    protected $hashtags;
 
 
     /**
@@ -163,5 +163,33 @@ class Answers
     public function getHashtags()
     {
         return $this->hashtags;
+    }
+    /**
+     * @var \MyTwit\MyTwitBundle\Entity\Tweets
+     */
+    protected $answersFor;
+
+
+    /**
+     * Set answersFor
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Tweets $answersFor
+     * @return Answers
+     */
+    public function setAnswersFor(\MyTwit\MyTwitBundle\Entity\Tweets $answersFor = null)
+    {
+        $this->answersFor = $answersFor;
+    
+        return $this;
+    }
+
+    /**
+     * Get answersFor
+     *
+     * @return \MyTwit\MyTwitBundle\Entity\Tweets 
+     */
+    public function getAnswersFor()
+    {
+        return $this->answersFor;
     }
 }

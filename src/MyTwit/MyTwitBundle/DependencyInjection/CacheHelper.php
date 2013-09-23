@@ -65,25 +65,11 @@ class CacheHelper
     /**
      * Create actuall user cache of tweets
      */
-    public function createUserCache($tweets, $answers)
+    public function createUserCache()
     {
-        $ids = array();
         $user_id = $this->_security->getToken()->getUser()->getID();
-        foreach($tweets as $tweet)
-        {
-                $ids[] = $tweet->getID();
-        }
-        $this->_cache->save($user_id.'.tweets',$ids);
-
-        $ids = array();
-        $i=0;
-        foreach($answers as $answer)
-        {
-            $ids[$i]['id'] = $answer->getID();
-            $ids[$i]['for'] = $answer->getAnswersFor()->getID();
-            $i++;
-        }
-        $this->_cache->save($user_id.'.answers', $ids);
+        $this->_cache->save($user_id.'.tweets', array('0'));
+        $this->_cache->save($user_id.'.answers', array('0'));
     }
     
     public function updateUserCache($ids)

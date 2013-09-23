@@ -5,32 +5,32 @@ myTwit.config(['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.endSymbol(']]');
   }]);
   
-myTwit.service('UpdateHelper', function() {
-    this.mergeRecursive = function(obj1, obj2) 
-    {
-        for (var p in obj2) 
-        {
-            try 
-            {
-                // Property in destination object set; update its value.
-                if ( obj2[p].constructor==Object ) 
-                {
-                    obj1[p] = MergeRecursive(obj1[p], obj2[p]);
+myTwit.service('AllHelper', function($http) {
+    this.realMerge = function (to, from) {
 
-                } 
-                else 
-                {
-                    obj1[p] = obj2[p];
-                }
-
-            } 
-            catch(e) 
-            {
-              // Property in destination object not set; create it and set its value.
-              obj1[p] = obj2[p];
-            }
+    for (n in from) {
+        if (typeof to[n] != 'object') {
+            to[n] = from[n];
+        } else if (typeof from[n] == 'object') {
+            to[n] = this.realMerge(to[n], from[n]);
         }
+    }
 
-      return obj1;
+    return to;
     };
+});
+
+myTwit.service('UpdateHelper', function($http, AllHelper) {
+    this.updateAllTweets = function()
+    {
+        var request = $http({method: 'POST', url: '/app_dev.php/logged/home/updatealltweets'})
+        .success(function(data, status, headers, config) {
+        if(data != 0)
+        {
+            return tweets = data;
+        }
+        });
+        return request;
+    };
+    
 });

@@ -21,9 +21,9 @@ class HomeController extends Controller
     {
         $cache = $this->get('cache_helper');
         $cache->createTweetsCache();
+        $cache->createUserCache();
+
         $form = $this->createForm(new TweetForm());
-                $cache = $this->get('winzou_cache.memcache');
-        $tweets_cache = $cache->fetch('Tweets');
         return $this->render('MyTwitMyTwitBundle:Index:home.html.twig', array(
             'form' => $form->createView()
         ));
@@ -49,13 +49,6 @@ class HomeController extends Controller
      * Action when user open this page. Get all tweets
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getTweetsAction()
-    {   
-        $ajax = $this->get('ajax_helper');
-        $data_array = $ajax->prepareArrayFromAllTweets();
-        return new JsonResponse($data_array);   
-    }
-    
     public function updateTweetsAction()
     {
         $id = $this->get('security.context')->getToken()->getUser()->getID();
@@ -63,12 +56,13 @@ class HomeController extends Controller
         $tweets_cache = $cache->fetch('Tweets');
         $user_cache = $cache->fetch($id.'.tweets');
         
-        if($tweets_cache == $user_cache)
+        if(end($tweets_cache) == end($user_cache))
         {
             return new JsonResponse(); 
         }
         else
         {
+            $t = (array($tweets_cache, $user_cache));
             $ajax = $this->get('ajax_helper');
             $data_array = $ajax->prepareArrayForUpdateTweets(end($user_cache));
             return new JsonResponse($data_array);

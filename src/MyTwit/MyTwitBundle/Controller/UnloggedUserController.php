@@ -83,6 +83,7 @@ class UnloggedUserController extends Controller
                     //prepare data to save
                     $user->setPassword($helper->hashPassword($user->getPassword()));
                     $user->setToken($helper->hashPassword($user->getNickname()));
+                    $user->setIs_Active(0);
                     
                     //save user to DB
                     $helper->save($user);

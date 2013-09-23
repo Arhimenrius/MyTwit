@@ -1,24 +1,21 @@
-myTwit.controller('allTweetsController', function($scope, $http, UpdateHelper)
+myTwit.controller('allTweetsController', function($scope, $http, UpdateHelper, AllHelper)
 {
-    tweets = {};
     $scope.getTweets = function()
     {
-        $http({method: 'POST', url: '/app_dev.php/logged/home/getalltweets'})
-        .success(function(data, status, headers, config) {
-            $scope.tweets = data;
+        UpdateHelper.updateAllTweets().then(function(response){
+            $scope.tweets = response.data;
         });
     };
     
-    setInterval(function(){updateTweets()},60000);
+    setInterval(function(){$scope.updateTweets();},10000);
 
-    updateTweets = function()
+    $scope.updateTweets = function()
     {
-        $http({method: 'POST', url: '/app_dev.php/logged/home/updatealltweets'})
-        .success(function(data, status, headers, config) {
-        if(data != 0)
-        {
-            UpdateHelper.mergeRecursive($scope.tweets, data);
-        }
+        UpdateHelper.updateAllTweets().then(function(response){           
+            for (tweet in response.data) {                
+                $scope.tweets.push(response.data[tweet]);
+            }
         });
-    }
+        
+    };
 });

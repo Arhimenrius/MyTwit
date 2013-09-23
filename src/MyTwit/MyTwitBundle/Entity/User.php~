@@ -5,11 +5,11 @@ namespace MyTwit\MyTwitBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 /**
  * User
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface, \Serializable, AdvancedUserInterface
 {
     /**
      * @var integer
@@ -48,6 +48,7 @@ class User implements UserInterface, \Serializable
     
     protected $tweets;
 
+    protected $isActive;
 
      public function __construct()
      {
@@ -203,12 +204,12 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      */
-    private $observed;
+    protected $observed;
 
     /**
      * @var string
      */
-    private $hashtags;
+    protected $hashtags;
 
 
     /**
@@ -259,7 +260,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      */
-    private $role;
+    protected $role;
 
 
     /**
@@ -349,7 +350,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $answers;
+    protected $answers;
 
 
     /**
@@ -383,5 +384,63 @@ class User implements UserInterface, \Serializable
     public function getAnswers()
     {
         return $this->answers;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    protected $answersFor;
+
+
+    /**
+     * Add answersFor
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answersFor
+     * @return User
+     */
+    public function addAnswersFor(\MyTwit\MyTwitBundle\Entity\Answers $answersFor)
+    {
+        $this->answersFor[] = $answersFor;
+    
+        return $this;
+    }
+
+    /**
+     * Remove answersFor
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answersFor
+     */
+    public function removeAnswersFor(\MyTwit\MyTwitBundle\Entity\Answers $answersFor)
+    {
+        $this->answersFor->removeElement($answersFor);
+    }
+
+    /**
+     * Get answersFor
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswersFor()
+    {
+        return $this->answersFor;
+    }
+    
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
     }
 }

@@ -34,6 +34,8 @@ MyTwit\MyTwitBundle\Entity\User:
         hashtags:
             type: text
             nullable: true
+        is_active:
+            type: boolean
     lifecycleCallbacks: {  }
     oneToMany:
          tweets:

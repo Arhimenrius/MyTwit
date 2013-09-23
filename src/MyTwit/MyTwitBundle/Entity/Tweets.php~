@@ -38,7 +38,7 @@ class Tweets
     
      public function __construct()
      {
-         $this->answer_for = new ArrayCollection();  
+         $this->answersFor = new ArrayCollection();  
      }
 
     /**
@@ -131,5 +131,53 @@ class Tweets
         $this->hashtags = $hashtags;
     
         return $this;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    protected $answersFor;
+
+
+    /**
+     * Get hashtags
+     *
+     * @return string 
+     */
+    public function getHashtags()
+    {
+        return $this->hashtags;
+    }
+
+    /**
+     * Add answersFor
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answersFor
+     * @return Tweets
+     */
+    public function addAnswersFor(\MyTwit\MyTwitBundle\Entity\Answers $answersFor)
+    {
+        $this->answersFor[] = $answersFor;
+    
+        return $this;
+    }
+
+    /**
+     * Remove answersFor
+     *
+     * @param \MyTwit\MyTwitBundle\Entity\Answers $answersFor
+     */
+    public function removeAnswersFor(\MyTwit\MyTwitBundle\Entity\Answers $answersFor)
+    {
+        $this->answersFor->removeElement($answersFor);
+    }
+
+    /**
+     * Get answersFor
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswersFor()
+    {
+        return $this->answersFor;
     }
 }
