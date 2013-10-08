@@ -38,6 +38,7 @@ class TweetsHelper
      * @param \MyTwit\MyTwitBundle\Entity\Tweets $tweet Instance of Tweets
      */
     public function save(Tweets $tweet) {
+        $tweet->setContent(preg_replace("/#(\w*[a-zA-Z_]+\w*)/i", "<a href=\"http://".$_SERVER['HTTP_HOST']."".$_SERVER['SCRIPT_NAME']."/logged/tags/$1\">$0</a>", $tweet->getContent()));
         if(!$tweet->getId())
         {
             $this->_em->persist($tweet);
@@ -45,7 +46,5 @@ class TweetsHelper
         $this->_em->flush();  
         $this->_cache->updateTweetsCache($tweet->getId());
     }
-
 }
-
 ?>

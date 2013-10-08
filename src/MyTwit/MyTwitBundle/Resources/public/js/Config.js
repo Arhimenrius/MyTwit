@@ -1,4 +1,4 @@
-var myTwit = angular.module('myTwit', []);
+var myTwit = angular.module('myTwit', ['ngSanitize']);
 
 myTwit.config(['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');

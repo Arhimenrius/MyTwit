@@ -16,7 +16,6 @@ class HomeController extends Controller
      * Controller return home_page for logged user
      * @return view
      */
-   
     public function homeAction()
     {
         $cache = $this->get('cache_helper');
@@ -26,8 +25,7 @@ class HomeController extends Controller
         $form = $this->createForm(new TweetForm());
         return $this->render('MyTwitMyTwitBundle:Index:home.html.twig', array(
             'form' => $form->createView()
-        ));
-        
+        ));  
     }
     
     /**
@@ -66,7 +64,6 @@ class HomeController extends Controller
             $ajax = $this->get('ajax_helper');
             $data_array = $ajax->prepareArrayForUpdateTweets(end($user_cache));
             return new JsonResponse($data_array);
-        }
-          
+        } 
     }
 }
