@@ -1,17 +1,5 @@
 {% extends "MyTwitMyTwitBundle::base.html.twig" %}
 
-{% block short_box %}
-<div class="short_box">
-    <div class="user_info">
-        <div class="avatar">
-            <img src="/avatars/{{ app.user.avatar }}" />
-        </div>
-        <div class="nickname">
-            <a href="{{path('user_account')}}">{{ app.user.nickname }}</a>
-        </div>
-    </div>
-</div>
-{% endblock %}
 
 {% block long_box %}
 <script src="/bundles/mytwitmytwit/js/SelectTweets.js"></script>

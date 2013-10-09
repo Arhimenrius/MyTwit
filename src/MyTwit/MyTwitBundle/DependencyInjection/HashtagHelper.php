@@ -21,8 +21,8 @@ class HashtagHelper {
     {
         preg_match_all("/#(\w*[a-zA-Z_]+\w*)/i", $tweet->getContent(), $hashtags);
         $tweet->setHashtags($this->_prepareHashtag($hashtags));
-        $tweet->setContent(preg_replace("/#(\w*[a-zA-Z_]+\w*)/i", "<a href=\"http://".$_SERVER['HTTP_HOST']."".$_SERVER['SCRIPT_NAME']."/logged/tags/$1\">$0</a>", $tweet->getContent()));
-        
+        $tweet->setContent(preg_replace("/#(\w*[a-zA-Z0-9_]+\w*)/i", "<a href=\"http://".$_SERVER['HTTP_HOST']."".$_SERVER['SCRIPT_NAME']."/logged/tags/$1\">$0</a>", $tweet->getContent()));
+        $tweet->setContent(preg_replace("/@(\w*[a-zA-Z0-9_]+\w*)/i", "<a href=\"http://".$_SERVER['HTTP_HOST']."".$_SERVER['SCRIPT_NAME']."/logged/profil/$1\">$0</a>", $tweet->getContent()));
     }
     
     protected function _prepareHashtag(array $hashtags)

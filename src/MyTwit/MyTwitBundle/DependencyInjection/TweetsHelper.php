@@ -49,8 +49,24 @@ class TweetsHelper
         $this->_cache->updateTweetsCache($tweet->getId());
     }
     
-    
-    
-    
+    public function returnTweetsOfUser($username)
+    {
+        $user = $this->_em->getRepository('MyTwitMyTwitBundle:User')->findBy(array('nickname'=>$username));
+        $user_id = $user[0]->getId();
+        
+        $tweets = $this->_em->getRepository('MyTwitMyTwitBundle:Tweets')->findBy(array('author' => $user_id));
+        $tweets_array = array();
+        foreach($tweets as $key => $tweet)
+        {
+            $tweets_array[$key] = array(
+                'ID' => $tweet->getID(),
+                'Author' => $tweet->getAuthor()->getNickname(),
+                'Email' => $tweet->getAuthor()->getEmail(),
+                'Content' => htmlspecialchars_decode($tweet->getContent()),
+                'Date' => $tweet->getDate()->format('Y-m-d'),
+            );
+        }
+        return $tweets_array;
+    }
 }
 ?>

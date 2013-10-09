@@ -137,6 +137,15 @@ div.email{
     padding: 10px 0 0 0;
 }
 
+div.user_email{
+    font-weight: bold;
+    font-size:12px;
+    font-family:Arial, Helvetica;
+    margin-left:10px;
+    padding: 10px 0 0 0;
+    float:left;
+}
+
 div.date{
     font-weight: bold;
     font-size:14px;

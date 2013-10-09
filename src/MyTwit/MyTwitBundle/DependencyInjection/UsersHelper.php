@@ -93,6 +93,17 @@ class UsersHelper
             return 'Nie ma takiego użytkownika lub już jest zaaktywowany';
         }
     }
+    
+    public function returnUserData($username)
+    {
+        $user = $this->_em->getRepository('MyTwitMyTwitBundle:User')->findBy(array('nickname'=>$username));
+        $user_data = array(
+            'Nickname' => $user[0]->getNickname(),
+            'Email' => $user[0]->getEmail(),
+            'Avatar' => $user[0]->getAvatar(),
+        );
+        return $user_data;
+    }
 }
 
 ?>

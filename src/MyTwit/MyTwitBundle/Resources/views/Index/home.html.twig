@@ -1,28 +1,5 @@
 {% extends "MyTwitMyTwitBundle::base.html.twig" %}
 
-{% block short_box %}
-<div class="short_box">
-    <div class="user_info">
-        <div class="avatar">
-            <img src="/avatars/{{ app.user.avatar }}" />
-        </div>
-        <div class="nickname">
-            <a href="{{path('user_account')}}">{{ app.user.nickname }}</a>
-        </div>
-    </div>
-    <script src="/bundles/mytwitmytwit/js/AddTweet.js"></script>
-    <div class="tweet_form" ng-controller="addTweetController">
-        
-        {{form_start(form)}}
-            {{form_label(form.Tweet)}}<br />
-            {{form_widget(form.Tweet, {'attr': {'rows': '[[rows]]', 'style': 'border:1px solid [[color]]'}}) }}
-            <button ng-click="addTweet(content)" ng-disabled="checkButton(content)">Dodaj</button>
-            [[remaining_chars]]
-        {{form_end(form)}}
-    </div>
-</div>
-{% endblock %}
-
 {% block long_box %}
 <script src="/bundles/mytwitmytwit/js/SelectTweets.js"></script>
 <div class="long_box" ng-controller="allTweetsController" ng-init="getTweets()" ng-bind-html-unsafe="tweet.Content">

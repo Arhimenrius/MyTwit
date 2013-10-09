@@ -25,8 +25,10 @@
                 <li>|</li>
                 <a href="{{ path('user_account') }}"><li class="option">Twoje konto</li></a>
                 <li>|</li>
+                {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('config') }}"><li class="option">Konfiguracja</li></a>
                 <li>|</li>
+                {% endif %}
                 <a href="{{ path('logout') }}"><li class="option">Wyloguj</li></a>
             </ul>
         </div>
@@ -37,9 +39,25 @@
                         {{ flashMessage }}
                         {% endfor %}
             {% endif %}
-            
-            {% block short_box %}
-            {% endblock %}
+            <div class="short_box">
+                <div class="user_info">
+                    <div class="avatar">
+                        {% block avatar %}
+                            <img src="/avatars/{{ app.user.avatar }}" />
+                        {% endblock %}
+                    </div>
+                    <div class="nickname">
+                        {% block nickname %}
+                            <a href="{{path('user_account')}}">{{ app.user.nickname }}</a>
+                        {% endblock %}
+                    </div>
+                    <div class="user_email">
+                        {% block email %}
+                            {{ app.user.email }}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
             {% block long_box %}
             {% endblock %}
                 

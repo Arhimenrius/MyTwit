@@ -48,7 +48,11 @@ observed:
     
 user_account:
     pattern:  /logged/profil
-    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Profil:view }
+    
+other_user_account:
+    pattern:  /logged/profil/{username}
+    defaults: { _controller: MyTwitMyTwitBundle:Profil:view }
     
 config:
     pattern:  /admin/config

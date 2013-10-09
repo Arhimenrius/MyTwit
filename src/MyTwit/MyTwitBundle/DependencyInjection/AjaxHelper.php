@@ -37,7 +37,7 @@ class AjaxHelper
                 'ID' => $value->getID(),
                 'Author' => $value->getAuthor()->getNickname(),
                 'Email' => $value->getAuthor()->getEmail(),
-                'Content' => htmlspecialchars_decode($value->getContent()),
+                'Content' => $value->getContent(),
                 'Date' => $value->getDate()->format('Y-m-d'),
             );
         }
