@@ -45,9 +45,6 @@ class AjaxHelper
         return $all_data;
     }
 }    
-//dodać do cache usera nowo pobrane ID
-//wysłać do Angulara nową zawartość
-//doczepić do array
 
 
 ?>

@@ -40,7 +40,7 @@ class HomeController extends Controller
                 $tweet_helper = $this->get('tweets_helper');
                 $tweet_helper->prepareToAdd($tweet, $data);
                 $tweet_helper->save($tweet);
-        return new Response(print_r($data, 1));
+        return new Response();
     }
     
     /**

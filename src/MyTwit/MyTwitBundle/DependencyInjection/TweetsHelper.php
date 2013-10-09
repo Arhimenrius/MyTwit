@@ -9,16 +9,18 @@ class TweetsHelper
     protected $_security;
     protected $_request;
     protected $_cache;
+    protected $_hashtag;
     
     /**
      * 
      * @param \Doctrine\ORM\EntityManager $em Include database service
      */
-    public function __construct(\Doctrine\ORM\EntityManager $em, $security, $cache)
+    public function __construct(\Doctrine\ORM\EntityManager $em, $security, $cache, $hashtag)
     {
         $this->_em = $em;
         $this->_security = $security;
         $this->_cache = $cache;
+        $this->_hashtag = $hashtag;
     }
     
     /**
@@ -38,7 +40,7 @@ class TweetsHelper
      * @param \MyTwit\MyTwitBundle\Entity\Tweets $tweet Instance of Tweets
      */
     public function save(Tweets $tweet) {
-        $tweet->setContent(preg_replace("/#(\w*[a-zA-Z_]+\w*)/i", "<a href=\"http://".$_SERVER['HTTP_HOST']."".$_SERVER['SCRIPT_NAME']."/logged/tags/$1\">$0</a>", $tweet->getContent()));
+        $this->_hashtag->handleHashtags($tweet);
         if(!$tweet->getId())
         {
             $this->_em->persist($tweet);
@@ -46,5 +48,9 @@ class TweetsHelper
         $this->_em->flush();  
         $this->_cache->updateTweetsCache($tweet->getId());
     }
+    
+    
+    
+    
 }
 ?>

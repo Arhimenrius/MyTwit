@@ -34,9 +34,13 @@ about_you:
     pattern:  /logged/about_you
     defaults: { _controller: MyTwitMyTwitBundle:Home:home }
     
+tags_with_id:
+    pattern:  /logged/tags/{tagname}
+    defaults: { _controller: MyTwitMyTwitBundle:Tags:tags }
+    
 tags:
     pattern:  /logged/tags
-    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Tags:tags }
 
 observed:
     pattern:  /logged/observed

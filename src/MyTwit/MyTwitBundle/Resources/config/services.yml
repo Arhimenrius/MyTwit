@@ -9,7 +9,7 @@ services:
     
   tweets_helper:
     class: MyTwit\MyTwitBundle\DependencyInjection\TweetsHelper
-    arguments: [@doctrine.orm.entity_manager, @security.context, @cache_helper]
+    arguments: [@doctrine.orm.entity_manager, @security.context, @cache_helper, @hashtag_helper]
     
   security_helper:
     class: MyTwit\MyTwitBundle\DependencyInjection\SecurityHelper
@@ -30,3 +30,7 @@ services:
   cache_helper:
     class: MyTwit\MyTwitBundle\DependencyInjection\CacheHelper
     arguments: [@doctrine.orm.entity_manager, @winzou_cache.memcache, @security.context]
+    
+  hashtag_helper:
+    class: MyTwit\MyTwitBundle\DependencyInjection\HashtagHelper
+    arguments: [@doctrine.orm.entity_manager, @security.context]

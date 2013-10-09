@@ -41,6 +41,7 @@ class CacheHelper
         if(!$this->_cache->contains('Tweets_answers') && !empty($answers))
         {
             $i = 0;
+            $ids = array();
             foreach($answers as $answer)
             {
                 $ids[$i]['id'] = $answer->getID();

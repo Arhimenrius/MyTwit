@@ -7,7 +7,7 @@ myTwit.controller('allTweetsController', function($scope, $http, UpdateHelper, A
         });
     };
     
-    setInterval(function(){$scope.updateTweets();},10000);
+    setInterval(function(){$scope.updateTweets();},60000);
 
     $scope.updateTweets = function()
     {
