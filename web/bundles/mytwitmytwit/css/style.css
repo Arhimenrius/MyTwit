@@ -4,6 +4,14 @@ body{
     height:1000px;
 }
 
+a{
+    text-decoration: none;
+     color:#099;
+}
+a:hover{
+    text-decoration: underline;
+}
+
 textarea{
     resize:none;
 }
@@ -161,7 +169,7 @@ div.tweet_content{
     font-family: Arial, Helvetica;
     clear:both;
     padding: 10px 10px 30px 10px;
-    border-bottom: 1px #000 solid;
+    
 }
 div.tweet_form{
     color:#099;
@@ -169,4 +177,12 @@ div.tweet_form{
     clear:both;
     width:300px;
     font-weight: bold;
+}
+div.tweet{
+    border-bottom: 1px #000 solid;
+}
+div.answer{
+    font-size:13px;
+    margin-left:10px;
+    margin-bottom:10px;
 }

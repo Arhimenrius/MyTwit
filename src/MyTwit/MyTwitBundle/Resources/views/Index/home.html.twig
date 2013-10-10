@@ -1,13 +1,24 @@
 {% extends "MyTwitMyTwitBundle::base.html.twig" %}
-
+{% block additional_short_box %}
+<script src="/bundles/mytwitmytwit/js/AddTweet.js"></script>
+    <div class="tweet_form" ng-controller="addTweetController">        
+        {{form_start(form)}}
+            {{form_label(form.Tweet)}}<br />
+            {{form_widget(form.Tweet, {'attr': {'rows': '[[rows]]', 'style': 'border:1px solid [[color]]'}}) }}
+            <button ng-click="addTweet(content)" ng-disabled="checkButton(content)">Dodaj</button>
+            [[remaining_chars]]
+        {{form_end(form)}}
+    </div>
+{% endblock %}
 {% block long_box %}
 <script src="/bundles/mytwitmytwit/js/SelectTweets.js"></script>
 <div class="long_box" ng-controller="allTweetsController" ng-init="getTweets()" ng-bind-html-unsafe="tweet.Content">
     <div class="tweet" ng-repeat="tweet in tweets | orderBy:'ID':true" >
-        <div class="nickname">[[tweet.Author]]</div>
+        <div class="nickname"><a href="/app_dev.php/logged/profil/[[tweet.Author]]">[[tweet.Author]]</a></div>
         <div class="email">[[tweet.Email]]</div>
         <div class="date">[[tweet.Date]]</div>
         <div class="tweet_content" ng-bind-html="tweet.Content"></div>
+        <div class="answer" ng-click="addAnswerForm()"><a href="#">Odpowiedz</a></div>
     </div>
 </div>
 {% endblock %}

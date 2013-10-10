@@ -1,5 +1,12 @@
-myTwit.controller('allTweetsController', function($scope, $http, UpdateHelper, AllHelper)
+myTwit.controller('allTweetsController', function($scope, $element, $http, UpdateHelper, AllHelper, $compile)
 {
+    $scope.addAnswerForm = function()
+    {
+        newElement = $compile("<p>fwe</div>")($scope)
+        console.log($element);
+        $element.append(newElement)
+    }
+    
     $scope.getTweets = function()
     {
         UpdateHelper.updateAllTweets().then(function(response){

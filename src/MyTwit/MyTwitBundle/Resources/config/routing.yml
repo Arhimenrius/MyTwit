@@ -32,7 +32,7 @@ answers:
     
 about_you:
     pattern:  /logged/about_you
-    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Aboutyou:view }
     
 tags_with_id:
     pattern:  /logged/tags/{tagname}
@@ -44,7 +44,11 @@ tags:
 
 observed:
     pattern:  /logged/observed
-    defaults: { _controller: MyTwitMyTwitBundle:Home:home }
+    defaults: { _controller: MyTwitMyTwitBundle:Observed:view }
+    
+change_observed:
+    pattern:  /logged/observed/change
+    defaults: { _controller: MyTwitMyTwitBundle:Profil:changeobserved}
     
 user_account:
     pattern:  /logged/profil

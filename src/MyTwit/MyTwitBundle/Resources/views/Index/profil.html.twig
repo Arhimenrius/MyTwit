@@ -9,7 +9,18 @@
 {% block email %}
     {{ user_data.Email }}
 {% endblock %}
-
+{% block additional_short_box %}
+    <script src="/bundles/mytwitmytwit/js/AddToObserved.js"></script>
+    {% if(app.user.nickname != user_data.Nickname) %}
+    <div class="tweet_form" ng-controller="ToObservedController">
+        {% if(observed == true) %}
+        <a href="" id="{{user_data.Id}}" ng-click="changeObserved()" class="observedlink">Przestań obserwować</a>
+        {% else %}
+        <a href="" id="{{user_data.Id}}" ng-click="changeObserved()" class="observedlink">Obserwuj</a>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock %}
 
 {% block long_box %}
 <div class="long_box">

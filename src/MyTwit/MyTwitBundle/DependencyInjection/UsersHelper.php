@@ -6,14 +6,16 @@ use MyTwit\MyTwitBundle\Entity\User;
 class UsersHelper
 {
     protected $_em;
+    protected $_security;
     
     /**
      * 
      * @param \Doctrine\ORM\EntityManager $em Include database service
      */
-    public function __construct(\Doctrine\ORM\EntityManager $em)
+    public function __construct(\Doctrine\ORM\EntityManager $em, $security)
     {
         $this->_em = $em;
+        $this->_security = $security;
     }
     
     /**
@@ -94,15 +96,68 @@ class UsersHelper
         }
     }
     
+    /**
+     * Return data of user how array.
+     * 
+     * @param string $username Nickname of user
+     * @return array Return all data of user
+     */
     public function returnUserData($username)
     {
         $user = $this->_em->getRepository('MyTwitMyTwitBundle:User')->findBy(array('nickname'=>$username));
         $user_data = array(
+            'Id' => $user[0]->getId(),
             'Nickname' => $user[0]->getNickname(),
             'Email' => $user[0]->getEmail(),
             'Avatar' => $user[0]->getAvatar(),
         );
         return $user_data;
+    }
+    
+    public function returnObservedArray($observed)
+    {
+        $observed_user = explode(',', $observed);
+        array_pop($observed_user);
+        return $observed_user;
+    }
+    
+    public function changeObserved($data)
+    {
+        $user = $this->_em->getRepository('MyTwitMyTwitBundle:User')->find($this->_security->getToken()->getUser()->getID());
+        $observed = $this->returnObservedArray($user->getObserved());
+        if($data->change == 'add')
+        {
+            $key = '';
+            $key = array_search((int)$data->id, $observed);
+            if($key != '')
+            {
+                unset($observed[$key]);
+            }
+            if((int)$data->id != 0)
+                $observed[] = (int)$data->id;
+        }
+        else
+        {
+            $key = '';
+            $key = array_search((int)$data->id, $observed);
+            if($key != '')
+            {
+                unset($observed[$key]);
+            }
+        }
+        $observed_to_db = '';
+        foreach($observed as $obs)
+        {
+            $observed_to_db .= $obs.',';
+        }
+        $user->setObserved($observed_to_db);
+        $this->_em->flush();
+    }
+    
+    public function returnObservedUsers()
+    {
+        $user = $this->_em->getRepository('MyTwitMyTwitBundle:User')->find($this->_security->getToken()->getUser()->getID());
+        $observed = $this->returnObservedArray($user->getObserved());
     }
 }
 

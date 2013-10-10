@@ -73,6 +73,11 @@ class CacheHelper
         $this->_cache->save($user_id.'.answers', array('0'));
     }
     
+    /**
+     * Method for update cache of user.
+     * 
+     * @param int $ids ID of user to update cache
+     */
     public function updateUserCache($ids)
     {
         $user_id = $this->_security->getToken()->getUser()->getID();

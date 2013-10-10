@@ -5,7 +5,7 @@ services:
     
   users_helper:
     class: MyTwit\MyTwitBundle\DependencyInjection\UsersHelper
-    arguments: [@doctrine.orm.entity_manager]
+    arguments: [@doctrine.orm.entity_manager, @security.context]
     
   tweets_helper:
     class: MyTwit\MyTwitBundle\DependencyInjection\TweetsHelper

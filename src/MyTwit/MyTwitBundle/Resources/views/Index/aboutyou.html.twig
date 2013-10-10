@@ -1,0 +1,14 @@
+{% extends "MyTwitMyTwitBundle::base.html.twig" %}
+
+{% block long_box %}
+<div class="long_box">
+    {% for tweet in user_tweets|reverse %}
+    <div class="tweet">
+        <div class="nickname">{{tweet.Author}}</div>
+        <div class="email">{{tweet.Email}}</div>
+        <div class="date">{{tweet.Date}}</div>
+        <div class="tweet_content">{{tweet.Content|raw}}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

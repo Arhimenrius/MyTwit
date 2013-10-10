@@ -55,18 +55,44 @@ class TweetsHelper
         $user_id = $user[0]->getId();
         
         $tweets = $this->_em->getRepository('MyTwitMyTwitBundle:Tweets')->findBy(array('author' => $user_id));
-        $tweets_array = array();
-        foreach($tweets as $key => $tweet)
+        
+        return $this->_returnArrayFromData($tweets);
+    }
+    
+    public function returnTweetsAboutUser()
+    {
+        $username = '@'.$this->_security->getToken()->getUser()->getNickname();
+        $query = $this
+                ->_em
+                ->createQueryBuilder()
+                ->select('t')
+                ->from('MyTwitMyTwitBundle:Tweets', 't')
+                ->where('t.content LIKE :username')
+                ->setParameter('username', '%'.$username.'%');
+        $tweets = $query->getQuery()->getResult();
+        
+        return $this->_returnArrayFromData($tweets);
+        
+    }
+    
+    /**
+     * Prepare array from Database
+     * @param object $data Array with object from Database
+     */
+    protected function _returnArrayFromData($data)
+    {
+        $all_data = array();
+        foreach($data as $key => $value)
         {
-            $tweets_array[$key] = array(
-                'ID' => $tweet->getID(),
-                'Author' => $tweet->getAuthor()->getNickname(),
-                'Email' => $tweet->getAuthor()->getEmail(),
-                'Content' => htmlspecialchars_decode($tweet->getContent()),
-                'Date' => $tweet->getDate()->format('Y-m-d'),
+            $all_data[$key] = array(
+                'ID' => $value->getID(),
+                'Author' => $value->getAuthor()->getNickname(),
+                'Email' => $value->getAuthor()->getEmail(),
+                'Content' => $value->getContent(),
+                'Date' => $value->getDate()->format('Y-m-d'),
             );
         }
-        return $tweets_array;
+        return $all_data;
     }
 }
 ?>
