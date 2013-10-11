@@ -186,3 +186,23 @@ div.answer{
     margin-left:10px;
     margin-bottom:10px;
 }
+
+div.small_user_info{
+    width:170px;
+    height:180px;
+    float:left;
+    margin:5px;
+    border:1px solid #000;
+    text-align: center;
+}
+
+div.small_avatar{
+    margin-top:15px;
+}
+div.small_nickname{
+    font-weight: bold;
+    font-size:14px;
+}
+div.small_user_email{
+    font-size:12px;
+}

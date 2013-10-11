@@ -158,6 +158,33 @@ class UsersHelper
     {
         $user = $this->_em->getRepository('MyTwitMyTwitBundle:User')->find($this->_security->getToken()->getUser()->getID());
         $observed = $this->returnObservedArray($user->getObserved());
+        return $observed;
+    }
+    
+    public function searchUserOfTheId($ids)
+    {
+        $query = $this->_em->createQueryBuilder()->select('u')->from('MyTwitMyTwitBundle:User', 'u');
+        $where = 'u.id IN (';
+        foreach($ids as $id)
+        { 
+            $where .= $id.',';
+        }
+        $where = substr($where, 0, -1);
+        $where .= ')';
+        $query->where($where);
+        $users = $query->getQuery()->getResult();
+        
+        $user_data = array();
+        foreach($users as $key => $user)
+        {
+           $user_data[] = array(
+            'Id' => $user->getId(),
+            'Nickname' => $user->getNickname(),
+            'Email' => $user->getEmail(),
+            'Avatar' => $user->getAvatar(),
+        ); 
+        }
+        return $user_data;
     }
 }
 

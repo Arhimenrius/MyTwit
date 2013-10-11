@@ -10,7 +10,8 @@ class ObservedController extends Controller  {
     public function viewAction()
     {
         $user = $this->get('users_helper')->returnObservedUsers();
-        return $this->render('MyTwitMyTwitBundle:Index:observed.html.twig');
+        $observed_user = $this->get('users_helper')->searchUserOfTheId($user);
+        return $this->render('MyTwitMyTwitBundle:Index:observed.html.twig', array('users_data' => $observed_user));
     }
 }
 

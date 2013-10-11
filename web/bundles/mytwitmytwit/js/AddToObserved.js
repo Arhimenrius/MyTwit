@@ -1,31 +1,35 @@
 myTwit.controller('ToObservedController', function($scope, $http)
 {
+    var id = '';
+    $('.observedlink').click(function(){
+        id = $(this).attr("id"); 
+    });
     $scope.changeObserved = function()
     {
         var change = '';
-        if($('.observedlink').text() == 'Obserwuj')
+
+        if($('a#'+id).text() == 'Obserwuj')
         {
-            $('.observedlink').text('Przestań obserwować');
+            $('a#'+id).text('Przestań obserwować');
             change = 'add';
         }
         else
         {
-            $('.observedlink').text('Obserwuj');
+            $('a#'+id).text('Obserwuj');
             change = 'delete';
         }
-        
+        console.log(id);
         $http({
                 method: 'POST',
                 url: '/app_dev.php/logged/observed/change',
                 data: {
-                id:$('.observedlink').attr("id"),
+                id:id,
                 change:change,
             },
                 headers: {'Content-Type': 'application/json'},
             })
             .success(function(response, data)
             {
-                console.log(response);
             });
     }
 });
