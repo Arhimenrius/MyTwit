@@ -123,6 +123,7 @@ class UsersHelper
     
     public function changeObserved($data)
     {
+
         $user = $this->_em->getRepository('MyTwitMyTwitBundle:User')->find($this->_security->getToken()->getUser()->getID());
         $observed = $this->returnObservedArray($user->getObserved());
         if($data->change == 'add')
@@ -140,10 +141,7 @@ class UsersHelper
         {
             $key = '';
             $key = array_search((int)$data->id, $observed);
-            if($key != '')
-            {
-                unset($observed[$key]);
-            }
+            unset($observed[$key]);
         }
         $observed_to_db = '';
         foreach($observed as $obs)
@@ -186,6 +184,8 @@ class UsersHelper
         }
         return $user_data;
     }
+    
+    
 }
 
 ?>

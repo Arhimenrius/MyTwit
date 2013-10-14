@@ -3,13 +3,17 @@
 {% block long_box %}
 <script src="/bundles/mytwitmytwit/js/AddToObserved.js"></script>
 <div class="long_box">
-{% for user in users_data %}
-        <div class="small_user_info">
-            <div class="small_avatar"><img src="/avatars/{{ user.Avatar }}" /></div>
-            <div class="small_nickname"><a href="{{path('other_user_account', {'username': user.Nickname}) }}">{{user.Nickname}}</a></div>
-            <div class="small_user_email">{{user.Email}}</div>
-            <div class="small_nickname" ng-controller="ToObservedController"><a href="" id="{{user.Id}}" ng-click="changeObserved()" class="observedlink">Przestań obserwować</a></div>
-        </div>
-{% endfor %}
+{% if users_data is iterable %}  
+    {% for user in users_data %}
+            <div class="small_user_info" style="opacity: 1;">
+                <div class="small_avatar"><img src="/avatars/{{ user.Avatar }}" /></div>
+                <div class="small_nickname"><a href="{{path('other_user_account', {'username': user.Nickname}) }}">{{user.Nickname}}</a></div>
+                <div class="small_user_email">{{user.Email}}</div>
+                <div class="small_nickname" ng-controller="ToObservedController"><a href="" id="{{user.Id}}" ng-click="changeObserved()" class="observedlink">Przestań obserwować</a></div>
+            </div>
+    {% endfor %}     
+{% else %}
+        {{users_data}}
+{% endif %}
 </div>
 {% endblock %}

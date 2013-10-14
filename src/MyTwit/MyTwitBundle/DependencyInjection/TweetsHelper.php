@@ -94,5 +94,17 @@ class TweetsHelper
         }
         return $all_data;
     }
+    
+    public function returnTweetsFromAllUserTags()
+    {
+        $hashtags = $this->_security->getToken()->getUser()->getHashtags();
+        $query = $this->_em->createQueryBuilder()->select('t')->from('MyTwitMyTwitBundle:Tweets', 't');
+        $where = 't.id IN (';
+        $where .= $hashtags;
+        $where = substr($where, 0, -1);
+        $where .= ')';
+        $query->where($where);
+        return $query->getQuery()->getResult();
+    }
 }
 ?>

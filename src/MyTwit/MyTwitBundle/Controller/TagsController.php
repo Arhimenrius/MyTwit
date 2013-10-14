@@ -9,8 +9,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TagsController extends Controller
 {
-    public function tagsAction($name = '0')
+    public function tagsAction($name = 'gt$rgBdSA$7*9,<cxzaeersaazz')
     {
+        if($name == 'gt$rgBdSA$7*9,<cxzaeersaazz')
+        {
+            $tweets = $this->get('tweets_helper')->returnTweetsFromAllUserTags();
+        }
+        else
+        {
+            
+        }
         return $this->render('MyTwitMyTwitBundle:Index:tags.html.twig');
     }
 }
