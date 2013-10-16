@@ -15,6 +15,7 @@ MyTwit\MyTwitBundle\Entity\Answers:
             type: datetime
         hashtags:
             type: text
+            nullable: true
     lifecycleCallbacks: {  }
     manyToOne:
         answersFor:

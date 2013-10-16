@@ -10,11 +10,13 @@ myTwit.controller('addTweetController', function($scope, $http, UpdateHelper)
         if($scope.remaining_chars < 0)
         {
             $scope.color = 'red';
+            $scope.size = '5';
             $scope.remaining_chars = 'Maksymalna długość to 255 znaków. Tweet nie zostanie dodany.'
         }
         else
         {
             $scope.color = 'black';
+            $scope.size = '1';
         }
     }
     
@@ -33,7 +35,7 @@ myTwit.controller('addTweetController', function($scope, $http, UpdateHelper)
     
     $scope.checkButton = function(content)
     {
-        if(content.length == 0)
+        if(content.length == 0 || content.length > 255)
         {
             return true;
         }   

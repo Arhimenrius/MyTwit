@@ -18,6 +18,10 @@ add_twit:
     pattern: /logged/home/addtwit
     defaults: { _controller: MyTwitMyTwitBundle:Home:addTweet }
     
+add_answer:
+    pattern: /logged/home/addanswer
+    defaults: { _controller: MyTwitMyTwitBundle:Home:addAnswer }
+    
 return_all_tweets:
     pattern: /logged/home/getalltweets
     defaults: { _controller: MyTwitMyTwitBundle:Home:getTweets }
@@ -60,6 +64,6 @@ other_user_account:
     
 config:
     pattern:  /admin/config
-    defaults: { _controller: MyTwitMyTwitBundle:Home:config }
+    defaults: { _controller: MyTwitMyTwitBundle:Admin:config }
     
 

@@ -1,28 +1,28 @@
 myTwit.controller('ToObservedController', function($scope, $http)
 {
     var id = '';
-    $('.observedlink').click(function(){
+    jQuery('.observedlink').click(function(){
         id = $(this).attr("id"); 
     });
     $scope.changeObserved = function()
     {
         var change = '';
 
-        if($('a#'+id).text() == 'Obserwuj')
+        if(jQuery('a#'+id).text() == 'Obserwuj')
         {
-            $('a#'+id).text('Przestań obserwować');
-            if($('a#'+id).parent().parent().attr("class") != 'short_box')
+            jQuery('a#'+id).text('Przestań obserwować');
+            if(jQuery('a#'+id).parent().parent().attr("class") != 'short_box')
             {
-                $('a#'+id).parent().parent().css("opacity", "1");
+                jQuery('a#'+id).parent().parent().css("opacity", "1");
             }
             change = 'add';
         }
         else
         {
-            $('a#'+id).text('Obserwuj');
-            if($('a#'+id).parent().parent().attr("class") != 'short_box')
+            jQuery('a#'+id).text('Obserwuj');
+            if(jQuery('a#'+id).parent().parent().attr("class") != 'short_box')
             {
-                $('a#'+id).parent().parent().css("opacity", "0.5");
+                jQuery('a#'+id).parent().parent().css("opacity", "0.5");
             }
             change = 'delete';
         }

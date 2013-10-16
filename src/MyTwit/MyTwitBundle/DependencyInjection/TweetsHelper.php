@@ -30,9 +30,11 @@ class TweetsHelper
      */
     public function prepareToAdd(Tweets $tweet, $data)
     {
+        $token = $this->_generateToken(20);
         $tweet->setAuthor($this->_em->getRepository('MyTwitMyTwitBundle:User')->find($this->_security->getToken()->GetUser()->getID()));
         $tweet->setContent($data->content);
         $tweet->setDate(new \DateTime("now"));
+        $tweet->setToken(hash('sha1', $token));
     }
     
     /**
@@ -72,7 +74,6 @@ class TweetsHelper
         $tweets = $query->getQuery()->getResult();
         
         return $this->_returnArrayFromData($tweets);
-        
     }
     
     /**
@@ -90,6 +91,7 @@ class TweetsHelper
                 'Email' => $value->getAuthor()->getEmail(),
                 'Content' => $value->getContent(),
                 'Date' => $value->getDate()->format('Y-m-d'),
+                'Token' => $value->getToken(),
             );
         }
         return $all_data;
@@ -97,14 +99,25 @@ class TweetsHelper
     
     public function returnTweetsFromAllUserTags()
     {
-        $hashtags = $this->_security->getToken()->getUser()->getHashtags();
+       /* $hashtags = $this->_security->getToken()->getUser()->getHashtags();
         $query = $this->_em->createQueryBuilder()->select('t')->from('MyTwitMyTwitBundle:Tweets', 't');
         $where = 't.id IN (';
         $where .= $hashtags;
         $where = substr($where, 0, -1);
         $where .= ')';
         $query->where($where);
-        return $query->getQuery()->getResult();
+        return $query->getQuery()->getResult();*/
+    }
+    
+    protected function _generateToken($length)
+    {
+        $key = '';
+        $keys = array_merge(range(0,9), range('a', 'z'));
+        for($i=0; $i < $length; $i++) 
+        {
+            $key .= $keys[array_rand($keys)];
+        }
+        return $key;
     }
 }
 ?>

@@ -33,8 +33,6 @@ class TweetForm extends AbstractType
                 'ng-blur' => 'changeRows(\'b\', content)',
             )
         ));
-        
-        $builder->add('Answer', 'hidden');
     }
     
     /**

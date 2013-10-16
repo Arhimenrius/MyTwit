@@ -17,7 +17,7 @@ class HashtagHelper {
         $this->_security = $security;
     }
     
-    public function handleHashtags(Tweets $tweet)
+    public function handleHashtags($tweet)
     {
         preg_match_all("/#(\w*[a-zA-Z_]+\w*)/i", $tweet->getContent(), $hashtags);
         $tweet->setHashtags($this->_prepareHashtag($hashtags));

@@ -1,4 +1,4 @@
-myTwit.controller('allTweetsController', function($scope, $element, $http, UpdateHelper, AllHelper, $compile)
+myTwit.controller('allTweetsController', function($scope, $element, $http, UpdateHelper, $compile)
 {   
     $scope.getTweets = function()
     {

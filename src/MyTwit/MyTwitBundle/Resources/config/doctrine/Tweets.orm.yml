@@ -16,6 +16,9 @@ MyTwit\MyTwitBundle\Entity\Tweets:
         hashtags:
             type: text
             nullable: true
+        token:
+            type: string
+            length: '128'
     lifecycleCallbacks: {  }
     manyToOne:
         author:

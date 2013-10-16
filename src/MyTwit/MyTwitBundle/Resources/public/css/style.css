@@ -206,3 +206,8 @@ div.small_nickname{
 div.small_user_email{
     font-size:12px;
 }
+
+b.length{
+    margin-left:40px;
+    color:#099;
+}

@@ -54,6 +54,8 @@ class HomeController extends Controller
         $tweets_cache = $cache->fetch('Tweets');
         $user_cache = $cache->fetch($id.'.tweets');
         
+        //print_r($tweets_cache);
+        //print_r($user_cache);
         if(end($tweets_cache) == end($user_cache))
         {
             return new JsonResponse(); 
@@ -65,5 +67,12 @@ class HomeController extends Controller
             $data_array = $ajax->prepareArrayForUpdateTweets(end($user_cache));
             return new JsonResponse($data_array);
         } 
+    }
+    
+    public function addAnswerAction()
+    {
+        $data = json_decode($this->get('request')->getContent());
+        $this->get('answer_helper')->addAnswer($data);
+        return new Response();
     }
 }

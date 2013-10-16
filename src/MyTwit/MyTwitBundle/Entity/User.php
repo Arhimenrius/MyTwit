@@ -468,4 +468,27 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
     {
         return $this->is_active;
     }
+
+    /**
+     * Set is_active
+     *
+     * @param boolean $isActive
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->is_active = $isActive;
+    
+        return $this;
+    }
+
+    /**
+     * Get is_active
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->is_active;
+    }
 }

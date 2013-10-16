@@ -37,19 +37,6 @@ class CacheHelper
             }
             $this->_cache->save('Tweets', $ids);
         }
-        $answers = $this->_em->getRepository('MyTwitMyTwitBundle:Answers')->findAll();
-        if(!$this->_cache->contains('Tweets_answers') && !empty($answers))
-        {
-            $i = 0;
-            $ids = array();
-            foreach($answers as $answer)
-            {
-                $ids[$i]['id'] = $answer->getID();
-                $ids[$i]['for'] = $answer->getAnswersFor()->getID();
-                $i++;
-            }
-            $this->_cache->save('Tweets_answers', $ids);
-        }
     }
     
     /**
@@ -70,7 +57,6 @@ class CacheHelper
     {
         $user_id = $this->_security->getToken()->getUser()->getID();
         $this->_cache->save($user_id.'.tweets', array('0'));
-        $this->_cache->save($user_id.'.answers', array('0'));
     }
     
     /**

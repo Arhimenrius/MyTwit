@@ -10,6 +10,10 @@ services:
   tweets_helper:
     class: MyTwit\MyTwitBundle\DependencyInjection\TweetsHelper
     arguments: [@doctrine.orm.entity_manager, @security.context, @cache_helper, @hashtag_helper]
+  
+  answer_helper:
+    class: MyTwit\MyTwitBundle\DependencyInjection\AnswerHelper
+    arguments: [@doctrine.orm.entity_manager, @security.context, @cache_helper, @hashtag_helper]
     
   security_helper:
     class: MyTwit\MyTwitBundle\DependencyInjection\SecurityHelper

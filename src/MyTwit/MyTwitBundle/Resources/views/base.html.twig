@@ -1,14 +1,14 @@
 <!DOCTYPE html >
 <html ng-app="myTwit">
     <head>
+        <title>{% block title %}{% endblock %}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
-        <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="/bundles/mytwitmytwit/js/Config.js"></script>
-        <script src="/bundles/mytwitmytwit/js/AddAnswer.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-sanitize.js"></script>
-        
-        <title>{% block title %}{% endblock %}</title>
+        <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="/bundles/mytwitmytwit/js/Config.js"></script>      
+        <script src="/bundles/mytwitmytwit/js/naturalSortVersionDates.js"></script>
+        <script src="/bundles/mytwitmytwit/js/AddAnswer.js"></script>
         {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href="/bundles/mytwitmytwit/css/style.css" />
         {% endblock %}
@@ -37,37 +37,39 @@
         </div>
         <br class="clear" />
         <div class="content">
-            {% if app.session.started %}
-                        {% for flashMessage in app.session.flashbag.get('notice') %}
-                        {{ flashMessage }}
-                        {% endfor %}
-            {% endif %}
-            <div class="short_box">
-                <div class="user_info">
-                    <div class="avatar">
-                        {% block avatar %}
-                            <img src="/avatars/{{ app.user.avatar }}" />
-                        {% endblock %}
+            {% if app.user != '' %}
+                {% if app.session.started %}
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                            {{ flashMessage }}
+                            {% endfor %}
+                {% endif %}
+                <div class="short_box">
+                    <div class="user_info">
+                        <div class="avatar">
+                            {% block avatar %}
+                                <img src="/avatars/{{ app.user.avatar }}" />
+                            {% endblock %}
+                        </div>
+                        <div class="nickname">
+                            {% block nickname %}
+                                <a href="{{path('user_account')}}">{{ app.user.nickname }}</a>
+                            {% endblock %}
+                        </div>
+                        <div class="user_email">
+                            {% block email %}
+                                {{ app.user.email }}
+                            {% endblock %}
+                        </div>
                     </div>
-                    <div class="nickname">
-                        {% block nickname %}
-                            <a href="{{path('user_account')}}">{{ app.user.nickname }}</a>
-                        {% endblock %}
-                    </div>
-                    <div class="user_email">
-                        {% block email %}
-                            {{ app.user.email }}
-                        {% endblock %}
-                    </div>
+                    {% block additional_short_box %}
+
+                    {% endblock %}
                 </div>
-                {% block additional_short_box %}
-                
+                {% endif %}
+
+                {% block long_box %}   
                 {% endblock %}
-            </div>
-                
-            {% block long_box %}
-            {% endblock %}
-                
+            
         </div>
     </body>
 </html>
