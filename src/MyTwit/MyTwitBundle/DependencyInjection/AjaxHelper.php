@@ -30,6 +30,8 @@ class AjaxHelper
                 ->setParameter('last_id', $last_id);
         $tweets = $query->getQuery()->getResult();
         $ids = array();
+        $id_cache = array();
+        $all_data = array();
         foreach($tweets as $key => $value)
         {
             $ids[] = $value->getID();

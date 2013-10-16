@@ -54,8 +54,10 @@ class HomeController extends Controller
         $tweets_cache = $cache->fetch('Tweets');
         $user_cache = $cache->fetch($id.'.tweets');
         
-        //print_r($tweets_cache);
-        //print_r($user_cache);
+//        var_dump($tweets_cache);
+//        var_dump($user_cache);
+        
+        
         if(end($tweets_cache) == end($user_cache))
         {
             return new JsonResponse(); 

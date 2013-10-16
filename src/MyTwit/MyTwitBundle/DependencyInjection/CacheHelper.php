@@ -56,7 +56,7 @@ class CacheHelper
     public function createUserCache()
     {
         $user_id = $this->_security->getToken()->getUser()->getID();
-        $this->_cache->save($user_id.'.tweets', array('0'));
+        $this->_cache->save($user_id.'.tweets', array());
     }
     
     /**
