@@ -160,7 +160,7 @@ div.date{
     font-family:Arial, Helvetica;
     float:right;
     margin-left:10px; 
-    padding: 10px 0 0 0;
+    padding: 10px 10px 0 0;
 }
 
 div.tweet_content{
@@ -179,7 +179,9 @@ div.tweet_form{
     font-weight: bold;
 }
 div.tweet{
-    border-bottom: 1px #000 solid;
+    padding-bottom:10px;
+    background:#fff;
+    box-shadow: 0 0 10px 1px #000;
 }
 div.answer{
     font-size:13px;
@@ -210,4 +212,12 @@ div.small_user_email{
 b.length{
     margin-left:40px;
     color:#099;
+}
+
+div.answers{
+    width:500px;
+    font-size:12px;
+    background:#ddd;
+    clear:both;
+    margin:5px;
 }

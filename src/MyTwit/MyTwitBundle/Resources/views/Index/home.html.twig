@@ -14,12 +14,18 @@
 <script src="/bundles/mytwitmytwit/js/SelectTweets.js"></script>
 <div class="long_box" ng-controller="allTweetsController" ng-init="getTweets()">
     <div class="tweet" ng-repeat="tweet in tweets | orderBy:'ID':true">
-        [[tweet.Answers]]
         <div class="nickname"><a href="/app_dev.php/logged/profil/[[tweet.Author]]">[[tweet.Author]]</a></div>
         <div class="email">[[tweet.Email]]</div>
         <div class="date">[[tweet.Date]]</div>
         <div class="tweet_content" ng-bind-html="tweet.Content"></div>
         <div class="answer" id="[[tweet.Token]]"><a href="" id="[[tweet.ID]]" class="add_answer_form">Odpowiedz</a></div>
+        <div class="answers" ng-repeat="tweet_answer in tweet.Answers | orderBy:'ID':true">
+            
+            <div class="nickname">[[tweet_answer.Author]]</div>
+            <div class="email">[[tweet_answer.Email]]</div>
+            <div class="date">[[tweet_answer.Date]]</div>
+            <div class="tweet_content">[[tweet_answer.Content]]</div>
+        </div>
     </div>
 </div>
 {% endblock %}
