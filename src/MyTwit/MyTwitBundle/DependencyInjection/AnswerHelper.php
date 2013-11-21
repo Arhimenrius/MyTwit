@@ -24,7 +24,7 @@ class AnswerHelper
         $this->_hashtag = $hashtag;
     }
     
-    public function addAnswer($data)
+    public function saveAnswer($data)
     {
         $tweet = $this->_em->getRepository('MyTwitMyTwitBundle:Tweets')->findBy(array('token' => $data->token));
         $answer = new Answers();
@@ -36,6 +36,8 @@ class AnswerHelper
         
         $this->_em->persist($answer);
         $this->_em->flush();
+        
+        $this->_cache->updateAnswersForTweets($answer->getId(), $answer->getAnswersFor()->getId());
     }
 }
 ?>

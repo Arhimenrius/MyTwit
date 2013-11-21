@@ -28,13 +28,41 @@ class CacheHelper
     public function createTweetsCache()
     {
         $tweets = $this->_em->getRepository('MyTwitMyTwitBundle:Tweets')->findAll();
+        $ids_for_answers = '';
         if(!$this->_cache->contains('Tweets') && !empty($tweets))
         {
             $ids = array();
             foreach($tweets as $tweet)
             {
-                $ids[] = $tweet->getID();
+                $ids_for_answers .= ',' . $tweet->getID();
+                $ids[] = array('ID' => $tweet->getID(), 'Answers' => array());
             }
+          
+            $tweets_ids = substr($ids_for_answers, 1);
+            if($tweets_ids != '')
+            {
+                $where = 'a.answersFor IN ('.$tweets_ids.')';
+                $query = $this->
+                        _em->
+                        createQueryBuilder()
+                        ->select('a')
+                        ->from('MyTwitMyTwitBundle:Answers', 'a')
+                        ->where($where);
+                $answers = $query->getQuery()->getResult();
+                
+                $key = '';
+                foreach ($answers as $key => $answer)
+                {
+                    foreach ($ids as $keys => $tweet)
+                    {
+                        if($tweet['ID'] == $answer->getAnswersFor()->getID())
+                        {
+                            $ids[$keys]['Answers'][] = $answer->getID();
+                            break;
+                        }
+                    }   
+                }
+            }    
             $this->_cache->save('Tweets', $ids);
         }
     }
@@ -46,7 +74,7 @@ class CacheHelper
     public function updateTweetsCache($id)
     {
         $tweets = $this->_cache->fetch('Tweets');
-        $tweets[] = $id;
+        $tweets[] = array('ID'=> $id, 'Answers' => array());
         $this->_cache->save('Tweets', $tweets);
     }
     
@@ -73,6 +101,21 @@ class CacheHelper
             array_push($tweets, $id);
         }
         $this->_cache->save($user_id.'.tweets',$tweets);
+   }
+   
+   public function updateAnswersForTweets($id, $answer_for)
+   {
+       $tweets = $this->_cache->fetch('Tweets');
+       $key = '';
+       foreach ($tweets as $keys => $tweet)
+       {
+           if($tweet['ID'] == $answer_for)
+           {
+               $key = $keys;
+           }
+       }
+       $tweets[$key]['Answers'][] = $id;
+       $this->_cache->save('Tweets', $tweets); 
    }
 }
 

@@ -1,4 +1,4 @@
-var myTwit = angular.module('myTwit', ['ngSanitize', 'naturalSort']);
+var myTwit = angular.module('myTwit', ['ngSanitize']);
 
 myTwit.config(['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
@@ -12,8 +12,6 @@ myTwit.service('UpdateHelper', function($http) {
         .success(function(data, status, headers, config) {
         if(data != 0)
         {
-            console.log(typeof data);
-            console.log(data);
             return tweets = data;
         }
         });

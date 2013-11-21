@@ -244,6 +244,22 @@ class ConfigHelper
 
         }
     }
+    
+    public function returnAnswerLastId($user_cache)
+    {
+        $max = 0;
+        foreach($user_cache as $keys => $values)
+        {
+            foreach($values['Answers'] as $key => $value)
+            {
+                if($max < $value)
+                {
+                    $max = $value;
+                }
+            }
+        }
+        return $max;
+    }
 }
 
 ?>

@@ -51,29 +51,6 @@ class Answers
     }
 
     /**
-     * Set answerFor
-     *
-     * @param integer $answerFor
-     * @return Answers
-     */
-    public function setAnswerFor($answerFor)
-    {
-        $this->answerFor = $answerFor;
-    
-        return $this;
-    }
-
-    /**
-     * Get answerFor
-     *
-     * @return integer 
-     */
-    public function getAnswerFor()
-    {
-        return $this->answerFor;
-    }
-
-    /**
      * Set author
      *
      * @param string $author

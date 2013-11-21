@@ -18,6 +18,12 @@ class HomeController extends Controller
      */
     public function homeAction()
     {
+//        $memcache_obj = new \Memcache;
+//$memcache_obj->connect('localhost', 11211);
+//
+//$memcache_obj->flush();
+
+        
         $cache = $this->get('cache_helper');
         $cache->createTweetsCache();
         $cache->createUserCache();
@@ -49,30 +55,38 @@ class HomeController extends Controller
      */
     public function updateTweetsAction()
     {
+        $last_id = 0;
         $id = $this->get('security.context')->getToken()->getUser()->getID();
         $cache = $this->get('winzou_cache.memcache');
-        $tweets_cache = $cache->fetch('Tweets');
+        $server_cache = $cache->fetch('Tweets');
         $user_cache = $cache->fetch($id.'.tweets');
+        if(!empty($user_cache))
+        {
+            $last_id = end($user_cache)['ID'];
+        }
         
-        //print_r($tweets_cache);
-        //print_r($user_cache);
-        if(end($tweets_cache) == end($user_cache))
+        //var_dump($server_cache);
+        //var_dump($user_cache);
+        
+        if(serialize($server_cache) == serialize($user_cache))
         {
             return new JsonResponse(); 
         }
         else
         {
-            $t = (array($tweets_cache, $user_cache));
+            
             $ajax = $this->get('ajax_helper');
-            $data_array = $ajax->prepareArrayForUpdateTweets(end($user_cache));
-            return new JsonResponse($data_array);
+            $answer_last_id = $this->get('config_helper')->returnAnswerLastId($user_cache);
+            $ajax->prepareArrayForUpdateTweets($last_id);
+            $data = $ajax->prepareArrayForUpdateAnswers($answer_last_id, $server_cache);
+            return new JsonResponse($data);
         } 
     }
     
     public function addAnswerAction()
     {
         $data = json_decode($this->get('request')->getContent());
-        $this->get('answer_helper')->addAnswer($data);
+        $this->get('answer_helper')->saveAnswer($data);
         return new Response();
     }
 }

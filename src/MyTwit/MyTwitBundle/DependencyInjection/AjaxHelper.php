@@ -9,6 +9,9 @@ class AjaxHelper
 {
     protected $_em;
     protected $_cache;
+    protected $_user_cache;
+    protected $_ids = array();
+    protected $_tweets_array = array();
     
     /**
      * 
@@ -29,13 +32,11 @@ class AjaxHelper
                 ->where('t.id > :last_id')
                 ->setParameter('last_id', $last_id);
         $tweets = $query->getQuery()->getResult();
-        $ids = array();
-        $id_cache = array();
         $all_data = array();
         foreach($tweets as $key => $value)
         {
-            $ids[] = $value->getID();
-            $all_data[] = array(
+            $this->_ids[] = $value->getID();
+            $this->_tweets_array[] = array(
                 'ID' => $value->getID(),
                 'Author' => $value->getAuthor()->getNickname(),
                 'Email' => $value->getAuthor()->getEmail(),
@@ -44,47 +45,44 @@ class AjaxHelper
                 'Token' => $value->getToken(),
                 'Answers' => array(),
             );
-            $id_cache[] = $value->getID();
+            $this->_user_cache[] = array('ID' => $value->getID(), 'Answers' => array());
         }
-        $all_data = $this->_prepareArrayForUpdateAnswers($id_cache, $all_data, $ids);
-        return $all_data;
     }
-    
-    protected function _prepareArrayForUpdateAnswers($ids_for_cache, $data, $ids)
+   
+    public function prepareArrayForUpdateAnswers($last_id, $server_cache)
     {
         
-        $query = $this->_em->createQueryBuilder()->select('a')->from('MyTwitMyTwitBundle:Answers', 'a');
-        
-        $query->where($this->_createQuery($data));
+        $query = $this->_em->createQueryBuilder()->select('a')->from('MyTwitMyTwitBundle:Answers', 'a')
+                ->where('a.id > :last_id')
+                ->setParameter('last_id', $last_id);
         $answers = $query->getQuery()->getResult();
-        //looking for ids for tweets where i must add answers
+        
         foreach($answers as $key => $answer)
         { 
-            $answer_for = array_keys($ids, $answer->getAnswersFor()->getID());
-            $data[$answer_for[0]]['Answers'][] = array(
+            $answer_for = $this->_returnTweetId($server_cache, $answer->getAnswersFor()->getID());
+            $this->_tweets_array[$answer_for]['Answers'][] = array(
                 'ID' => $answer->getID(),
                 'Author' => $answer->getAuthor()->getNickname(),
                 'Email' => $answer->getAuthor()->getEmail(),
                 'Content' => $answer->getContent(),
                 'Date' => $answer->getDate()->format('Y-m-d')
             );
-        }
-        $this->_cache->updateUserCache($ids_for_cache);
-        return $data;
+            $this->_user_cache[$answer_for]['Answers'][] = $answer->getID();
+        } 
+        $this->_cache->updateUserCache($this->_user_cache);
+        //$this->_cache->updateUserCache($ids_for_cache);
+        return $this->_tweets_array;
     }
     
-    protected function _createQuery($data)
+    protected function _returnTweetId($server_cache, $answerforid)
     {
-        $where = 'a.answersFor IN (';
-        foreach($data as $key => $value)
+        foreach($server_cache as $key => $value)
         {
-            $where .= $value['ID'] . ',';
+            if($value['ID'] == $answerforid)
+            {
+                return $key;
+            }
         }
-        $where = substr($where, 0, -1);
-        $where .= ')';
-        return $where;
     }
 }    
-
-
 ?>
