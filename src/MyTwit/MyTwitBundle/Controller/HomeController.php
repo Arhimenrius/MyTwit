@@ -62,7 +62,7 @@ class HomeController extends Controller
         $user_cache = $cache->fetch($id.'.tweets');
         if(!empty($user_cache))
         {
-            $last_id = end($user_cache)['ID'];
+            $last_id = end($user_cache);
         }
         
         //var_dump($server_cache);
