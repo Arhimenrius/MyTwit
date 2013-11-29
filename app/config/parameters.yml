@@ -1,10 +1,10 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     arhi2.linuxpl.info
+    database_host:     xxx
     database_port:     ~
-    database_name:     arhi2_mytwit
-    database_user:     arhi2_mytwit
-    database_password: mytwit
+    database_name:     xxx
+    database_user:     xxx
+    database_password: xxx
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
